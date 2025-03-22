@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/electric_violet_gradient"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Expense"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/edtExpenseDescription"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="Description"
+            android:textColor="@android:color/white"
+            android:textColorHint="#CCCCCC"/>
+
+        <EditText
+            android:id="@+id/edtExpenseAmount"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="Amount"
+            android:inputType="numberDecimal"
+            android:textColor="@android:color/white"
+            android:textColorHint="#CCCCCC"/>
+
+        <EditText
+            android:id="@+id/edtExpenseDate"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="Date (YYYY-MM-DD)"
+            android:inputType="date"
+            android:textColor="@android:color/white"
+            android:textColorHint="#CCCCCC"/>
+
+        <Spinner
+            android:id="@+id/spinnerCategory"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerTimePeriod"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:entries="@array/time_period_options"/>
+
+        <Button
+            android:id="@+id/btnUploadPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload Photo"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@android:color/holo_blue_dark"/>
+
+        <Button
+            android:id="@+id/btnSaveExpense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Expense"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@android:color/holo_green_dark"/>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/electric_violet_gradient"
+    android:padding="24dp">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="end|top"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/circular_border"
+            android:contentDescription="Manage Profile"
+            android:padding="8dp"
+            android:src="@drawable/profile_icon"
+            android:tooltipText="Click to Manage Profile" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dianca's Home Page"
+        android:textSize="34sp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click on the images below to navigate to different screens"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:textStyle="italic"
+        android:layout_marginBottom="24dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imgCategories"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/categories"
+            android:contentDescription="Manage Categories"
+            android:padding="8dp"
+            android:tooltipText="Click to Manage Categories"
+            android:layout_margin="8dp"
+            android:background="@drawable/border"/>
+
+        <ImageView
+            android:id="@+id/imgAddExpense"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="Add Expense"
+            android:padding="8dp"
+            android:src="@drawable/add_expense"
+            android:tooltipText="Click to Add Expense"
+            android:layout_margin="8dp"
+            android:background="@drawable/border"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imgBudgetGoals"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/budget_goals"
+            android:contentDescription="Set Budget Goals"
+            android:padding="8dp"
+            android:tooltipText="Click to Set Budget Goals"
+            android:layout_margin="8dp"
+            android:background="@drawable/border"/>
+
+        <ImageView
+            android:id="@+id/imgViewExpenses"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/view_expense"
+            android:contentDescription="View Expenses"
+            android:padding="8dp"
+            android:tooltipText="Click to View Expenses"
+            android:layout_margin="8dp"
+            android:background="@drawable/border"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imgCategorySummary"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/summary"
+            android:contentDescription="Category Summary"
+            android:padding="8dp"
+            android:tooltipText="Click to View Category Summary"
+            android:layout_margin="8dp"
+            android:background="@drawable/border"/>
+
+        <ImageView
+            android:id="@+id/imgGraph"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/graph"
+            android:contentDescription="Dashboard Activity"
+            android:padding="8dp"
+            android:tooltipText="Click to View Category Summary"
+            android:layout_margin="8dp"
+            android:background="@drawable/border"/>
+    </LinearLayout>
+    </LinearLayout>

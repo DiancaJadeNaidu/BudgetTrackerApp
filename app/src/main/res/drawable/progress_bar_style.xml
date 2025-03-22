@@ -1,0 +1,22 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background track -->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="12dp"/>
+            <solid android:color="#FFFFFF" /> <!-- Soft mint green background -->
+        </shape>
+    </item>
+
+    <!-- Secondary progress (optional for buffering effect) -->
+
+
+    <!-- Actual progress fill -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="12dp"/>
+                <solid android:color="#76FF03" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

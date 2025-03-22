@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BudgetTrackerApp</string>
+
+<string-array name="time_period_options">
+    <item>Day</item>
+    <item>Week</item>
+    <item>Month</item>
+    <item>Year</item>
+</string-array>
+</resources>

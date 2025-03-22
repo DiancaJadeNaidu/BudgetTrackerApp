@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/electric_violet_gradient"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Budget Goals"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/edtMinBudget"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:hint="Minimum Budget"
+        android:inputType="numberDecimal"
+        android:textColor="@android:color/white"
+        android:textColorHint="#BDBDBD"
+        android:backgroundTint="#BB86FC"/>
+
+    <EditText
+        android:id="@+id/edtMaxBudget"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:hint="Maximum Budget"
+        android:inputType="numberDecimal"
+        android:textColor="@android:color/white"
+        android:textColorHint="#BDBDBD"
+        android:backgroundTint="#BB86FC"/>
+
+    <Button
+        android:id="@+id/btnSaveBudget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Goals"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:backgroundTint="#f48fb1"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>

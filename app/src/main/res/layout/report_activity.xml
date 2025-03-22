@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/electric_violet_gradient"
+    android:padding="24dp"
+    android:gravity="center_vertical">
+
+    <!-- Issue Description Input -->
+    <EditText
+        android:id="@+id/issue_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Describe the issue..."
+        android:padding="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:textColor="@android:color/black"
+        android:textColorHint="#BDBDBD"
+        android:textSize="16sp" />
+
+    <!-- Send Report Button -->
+    <Button
+        android:id="@+id/send_message_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🚀 Send Report"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"
+        android:backgroundTint="#f48fb1"
+        android:elevation="6dp"
+        android:cornerRadius="24dp" />
+
+    <!-- Info Text -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="📧 Or you can email us at: darabudgeting@gmail.com"
+        android:layout_marginTop="20dp"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:padding="8dp"
+        android:fontFamily="sans-serif-medium" />
+</LinearLayout>

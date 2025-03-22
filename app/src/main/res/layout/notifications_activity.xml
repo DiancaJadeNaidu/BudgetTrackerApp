@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/electric_violet_gradient"
+    android:padding="24dp">
+
+    <!-- General Notifications Switch -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable General Notifications"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
+
+    <Switch
+        android:id="@+id/general_notifications_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- Promotional Notifications Switch -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable Promotional Notifications"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
+
+    <Switch
+        android:id="@+id/promotional_notifications_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- Alert Notifications Switch -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable Alert Notifications"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
+
+    <Switch
+        android:id="@+id/alert_notifications_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
