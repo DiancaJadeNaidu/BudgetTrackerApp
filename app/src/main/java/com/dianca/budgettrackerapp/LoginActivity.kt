@@ -1,67 +1,64 @@
 package com.dianca.budgettrackerapp
-
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.dianca.budgettrackerapp.HomeActivity
-import com.dianca.budgettrackerapp.R
-import com.dianca.budgettrackerapp.RegisterActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.google.firebase.auth.FirebaseAuth
+import com.dianca.budgettrackerapp.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var usernameInput: EditText
-    private lateinit var passwordInput: EditText
-    private lateinit var loginButton: Button
-    private lateinit var registerText: TextView
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        //using firebase for authorization
+        auth = FirebaseAuth.getInstance()
 
-        usernameInput = findViewById(R.id.edtUsername)
-        passwordInput = findViewById(R.id.edtPassword)
-        loginButton = findViewById(R.id.btnLogin)
-        registerText = findViewById(R.id.txtRegister)
+        binding.loginButton.setOnClickListener {
+            //allow user to enter input into fields
+            val username = binding.loginUsernameEditText.text.toString().trim()
+            val password = binding.loginPasswordEditText.text.toString().trim()
 
-        registerText.setOnClickListener {
-            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
-            startActivity(intent)
+            //handling -> if empty prompt to enter input
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                //all details entered and valid -> log user in
+                auth.signInWithEmailAndPassword(username, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            }
         }
 
-        loginButton.setOnClickListener {
-            val username = usernameInput.text.toString().trim()
-            val password = passwordInput.text.toString().trim()
-
-            if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Enter both username and password", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+        //allow user to reset password
+        binding.resetPasswordButton.setOnClickListener {
+            val email = binding.loginUsernameEditText.text.toString().trim()
+            if (email.isNotEmpty()) {
+                auth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            //link to reset password sent to email -> handled by firebase
+                            Toast.makeText(this, "Reset link sent to your email", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(this, "Failed to send reset email: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
             }
+        }
 
-            // Commented out the coroutine logic since the database part isn't yet implemented
-            // CoroutineScope(Dispatchers.IO).launch {
-            //     val user = db.userDao().getUser(username, password)
-
-            //     withContext(Dispatchers.Main) {  //commented out the database result handling
-            //         if (user != null) {
-            Toast.makeText(this@LoginActivity, "Login Successful!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-            intent.putExtra("USERNAME", username)
-            startActivity(intent)
-            finish()
-            //         } else {
-            //             Toast.makeText(this@LoginActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
-            //         }
-            //     }
-            // }
+        //link to register screen
+        binding.goToRegisterButton.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 }
