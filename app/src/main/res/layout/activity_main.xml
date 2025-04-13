@@ -1,63 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="24dp"
-    android:background="@drawable/electric_violet_gradient">
+    android:background="@drawable/backgroundimg">
 
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="250dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="340dp"
         android:layout_height="250dp"
-        android:contentDescription="App Logo"
-        android:src="@drawable/prog_logo"
-        android:layout_marginBottom="20dp"
-        android:elevation="8dp"
-        android:scaleType="centerCrop"/>
+        android:layout_marginBottom="24dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="272dp"
+            android:contentDescription="DARA Logo"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/dara" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tvAppName"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="DARA Budgeting"
-        android:textSize="43sp"
+        android:textColor="#FFB6C1"
+        android:textSize="40sp"
         android:textStyle="bold"
-        android:fontFamily="sans-serif-medium"
-        android:letterSpacing="0.05"
-        android:textColor="@color/sunset_color" />
+        android:elevation="2dp"
+        android:shadowColor="#000000"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2" />
 
     <TextView
-        android:id="@+id/tvTagline"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView4"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif-condensed-medium"
+        android:layout_marginBottom="32dp"
+        android:alpha="0.95"
+        android:ellipsize="none"
+        android:fontFamily="sans-serif"
+        android:maxLines="1"
         android:text="Define Aims, Allocate Resources, Achieve"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="20dp" />
-
+        android:textColor="#DDDDDD"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <Button
-        android:id="@+id/btnGoToLogin"
-        android:layout_width="wrap_content"
+        android:id="@+id/StartButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#f48fb1"
-        android:padding="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#FFB6C1"
+        android:elevation="6dp"
+        android:fontFamily="sans-serif-medium"
         android:text="Get Started"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginTop="95dp"
-        android:layout_marginBottom="20dp"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:layout_gravity="center"
-        android:elevation="4dp"
-        android:drawablePadding="10dp"/>
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="16dp" />
 
 </LinearLayout>
