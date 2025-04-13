@@ -30,8 +30,7 @@
         android:layout_marginTop="16dp"
         android:padding="12dp"
         android:backgroundTint="#f48fb1"
-        android:elevation="6dp"
-        android:cornerRadius="24dp" />
+        android:elevation="6dp" />
 
     <!-- Info Text -->
     <TextView

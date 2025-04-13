@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "579421800995",
+    "project_id": "budgettracker-2dc8f",
+    "storage_bucket": "budgettracker-2dc8f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579421800995:android:4d7519560865bdc60e3f96",
+        "android_client_info": {
+          "package_name": "com.dianca.budgettrackerapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByTiaRSrDqNlDgTRab9-MOOvrEEufzioA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

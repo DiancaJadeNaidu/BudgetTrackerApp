@@ -24,7 +24,6 @@
         android:hint="Current Password"
         android:inputType="textPassword"
         android:textColor="@android:color/white"
-        android:hintTextColor="@android:color/white"
         android:layout_marginBottom="16dp"/>
 
     <EditText
@@ -34,7 +33,6 @@
         android:hint="New Password"
         android:inputType="textPassword"
         android:textColor="@android:color/white"
-        android:hintTextColor="@android:color/white"
         android:layout_marginBottom="16dp"/>
 
     <Button
