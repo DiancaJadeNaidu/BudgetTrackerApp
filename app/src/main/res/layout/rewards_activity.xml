@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/electric_violet_gradient"
+    android:background="@drawable/backgroundimg"
     android:padding="24dp">
 
     <!-- Title for Rewards Section -->

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/electric_violet_gradient"
+    android:background="@drawable/backgroundimg"
     android:padding="24dp"
     android:gravity="center_vertical">
 
@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:hint="Describe the issue..."
         android:padding="16dp"
-        android:background="@drawable/rounded_edittext"
         android:textColor="@android:color/black"
         android:textColorHint="#BDBDBD"
         android:textSize="16sp" />

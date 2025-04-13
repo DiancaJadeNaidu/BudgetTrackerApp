@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/electric_violet_gradient"
-    android:padding="24dp"
-    android:gravity="center">
+    android:gravity="center_horizontal|top"
+    android:padding="32dp"
+    android:background="@drawable/backgroundimg">
 
     <TextView
         android:id="@+id/username"
