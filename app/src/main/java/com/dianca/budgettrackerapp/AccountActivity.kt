@@ -65,7 +65,7 @@ class AccountActivity : AppCompatActivity() {
             }
         }
 
-        // delete account confirmation
+        //delete account confirmation
         binding.btnDelete.setOnClickListener {
             AlertDialog.Builder(this)
                 .setTitle("Delete Account")
@@ -86,6 +86,7 @@ class AccountActivity : AppCompatActivity() {
         }
 
         //change profile picture (mocked)
+        //not yet implemented because of unknown reasons
         binding.btnChangeProfilePicture.setOnClickListener {
             Toast.makeText(this, "Feature coming soon: Choose your own profile image", Toast.LENGTH_SHORT).show()
         }
