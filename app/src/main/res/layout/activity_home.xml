@@ -1,134 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="@drawable/backgroundimg"
-    android:padding="24dp">
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/imgProfile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_gravity="end|top"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/circular_border"
-            android:contentDescription="Manage Profile"
-            android:padding="8dp"
-            android:src="@drawable/profile_icon"
-            android:tooltipText="Click to Manage Profile" />
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/tvWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dianca's Home Page"
-        android:textSize="34sp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:layout_marginBottom="24dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click on the images below to navigate to different screens"
-        android:textSize="18sp"
-        android:textColor="@android:color/white"
-        android:textStyle="italic"
-        android:layout_marginBottom="24dp"/>
+    android:background="@drawable/backgroundimg">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp">
 
-        <ImageView
-            android:id="@+id/imgCategories"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/categories"
-            android:contentDescription="Manage Categories"
-            android:padding="8dp"
-            android:tooltipText="Click to Manage Categories"
-            android:layout_margin="8dp"
-            android:background="@drawable/border"/>
+        <!-- Top-right profile icon -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imgAddExpense"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:contentDescription="Add Expense"
-            android:padding="8dp"
-            android:src="@drawable/add_expense"
-            android:tooltipText="Click to Add Expense"
-            android:layout_margin="8dp"
-            android:background="@drawable/border"/>
+            <ImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="end|top"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/circular_border"
+                android:contentDescription="Manage Profile"
+                android:padding="8dp"
+                android:src="@drawable/profile_icon"
+                android:tooltipText="Click to Manage Profile" />
+        </FrameLayout>
+
+        <!-- Welcome Text -->
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome!"
+            android:textSize="34sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Instruction -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click on the images below to navigate to different screens"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:textStyle="italic"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Row 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- Categories -->
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/imgCategories"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/categories"
+                    android:contentDescription="Manage Categories"
+                    android:padding="8dp"
+                    android:background="@drawable/border"
+                    android:tooltipText="Categories Screen" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Categories"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"
+                    android:background="#AA000000"
+                    android:padding="4dp"/>
+            </FrameLayout>
+
+            <!-- Add Expense -->
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/imgAddExpense"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/add_expense"
+                    android:contentDescription="Add Expense"
+                    android:padding="8dp"
+                    android:background="@drawable/border"
+                    android:tooltipText="Add Expense Screen" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add Expense"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"
+                    android:background="#AA000000"
+                    android:padding="4dp"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <!-- Row 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- Budget Goals -->
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/imgBudgetGoals"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/budget_goals"
+                    android:contentDescription="Set Budget Goals"
+                    android:padding="8dp"
+                    android:background="@drawable/border"
+                    android:tooltipText="Budget Goals Screen" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Budget Goals"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"
+                    android:background="#AA000000"
+                    android:padding="4dp"/>
+            </FrameLayout>
+
+            <!-- View Expenses -->
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/imgViewExpenses"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/view_expense"
+                    android:contentDescription="View Expenses"
+                    android:padding="8dp"
+                    android:background="@drawable/border"
+                    android:tooltipText="View Expenses Screen" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="View Expenses"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"
+                    android:background="#AA000000"
+                    android:padding="4dp"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <!-- Row 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- Category Summary -->
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/imgCategorySummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/summary"
+                    android:contentDescription="Category Summary"
+                    android:padding="8dp"
+                    android:background="@drawable/border"
+                    android:tooltipText="Category Summary Screen" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Category Summary"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"
+                    android:background="#AA000000"
+                    android:padding="4dp"/>
+            </FrameLayout>
+
+            <!-- Graph/Dashboard -->
+            <FrameLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="8dp">
+
+                <ImageView
+                    android:id="@+id/imgGraph"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/graph"
+                    android:contentDescription="Dashboard Activity"
+                    android:padding="8dp"
+                    android:background="@drawable/border"
+                    android:tooltipText="Dashboard Screen" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dashboard"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:layout_gravity="bottom"
+                    android:background="#AA000000"
+                    android:padding="4dp"/>
+            </FrameLayout>
+        </LinearLayout>
+
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/imgBudgetGoals"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/budget_goals"
-            android:contentDescription="Set Budget Goals"
-            android:padding="8dp"
-            android:tooltipText="Click to Set Budget Goals"
-            android:layout_margin="8dp"
-            android:background="@drawable/border"/>
-
-        <ImageView
-            android:id="@+id/imgViewExpenses"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/view_expense"
-            android:contentDescription="View Expenses"
-            android:padding="8dp"
-            android:tooltipText="Click to View Expenses"
-            android:layout_margin="8dp"
-            android:background="@drawable/border"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/imgCategorySummary"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/summary"
-            android:contentDescription="Category Summary"
-            android:padding="8dp"
-            android:tooltipText="Click to View Category Summary"
-            android:layout_margin="8dp"
-            android:background="@drawable/border"/>
-
-        <ImageView
-            android:id="@+id/imgGraph"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/graph"
-            android:contentDescription="Dashboard Activity"
-            android:padding="8dp"
-            android:tooltipText="Click to View Category Summary"
-            android:layout_margin="8dp"
-            android:background="@drawable/border"/>
-    </LinearLayout>
-    </LinearLayout>
+</ScrollView>
