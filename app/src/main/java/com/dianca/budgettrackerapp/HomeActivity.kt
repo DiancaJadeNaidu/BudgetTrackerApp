@@ -26,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        // Initialize views
+
         tvWelcome = findViewById(R.id.tvWelcome)
         imgProfile = findViewById(R.id.imgProfile)
         imgCategories = findViewById(R.id.imgCategories)
@@ -36,7 +36,6 @@ class HomeActivity : AppCompatActivity() {
         imgCategorySummary = findViewById(R.id.imgCategorySummary)
         imgGraph = findViewById(R.id.imgGraph)
 
-        // Get current user's email and update welcome message
         val currentUser = auth.currentUser
         currentUser?.email?.let { email ->
             val username = email.substringBefore("@")
@@ -53,11 +52,11 @@ class HomeActivity : AppCompatActivity() {
         }
 
         imgAddExpense.setOnClickListener {
-            // startActivity(Intent(this, AddExpenseActivity::class.java))
+             startActivity(Intent(this, AddExpenseActivity::class.java))
         }
 
         imgBudgetGoals.setOnClickListener {
-            // startActivity(Intent(this, BudgetGoalsActivity::class.java))
+             startActivity(Intent(this, BudgetGoalsActivity::class.java))
         }
 
         imgViewExpenses.setOnClickListener {

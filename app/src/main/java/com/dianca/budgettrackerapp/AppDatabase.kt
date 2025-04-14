@@ -7,14 +7,14 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [CategoryEntity::class, BudgetGoalEntity::class, ExpenseEntity::class],
-    version = 1,
+    version = 1, //this number gets incremented everytime there is a change to schema
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun categoryDao(): CategoryDAO
-    abstract fun budgetGoalDao(): BudgetGoalDAO
     abstract fun expenseDao(): ExpenseDAO
+    abstract fun budgetGoalDAO(): BudgetGoalDAO
 
     companion object {
         @Volatile
@@ -26,7 +26,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "budget_tracker_db"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }

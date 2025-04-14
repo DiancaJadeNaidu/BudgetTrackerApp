@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Heading -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -19,14 +20,25 @@
             android:textColor="@android:color/white"
             android:layout_marginBottom="16dp"/>
 
+        <!-- Expense Name -->
+        <EditText
+            android:id="@+id/edtExpenseName"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="Expense Name"
+            android:textColor="@android:color/white"
+            android:textColorHint="#CCCCCC" />
+
+        <!-- Description -->
         <EditText
             android:id="@+id/edtExpenseDescription"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:hint="Description"
             android:textColor="@android:color/white"
-            android:textColorHint="#CCCCCC"/>
+            android:textColorHint="#CCCCCC" />
 
+        <!-- Amount -->
         <EditText
             android:id="@+id/edtExpenseAmount"
             android:layout_width="match_parent"
@@ -34,43 +46,80 @@
             android:hint="Amount"
             android:inputType="numberDecimal"
             android:textColor="@android:color/white"
-            android:textColorHint="#CCCCCC"/>
+            android:textColorHint="#CCCCCC" />
 
+        <!-- Expense Date -->
         <EditText
             android:id="@+id/edtExpenseDate"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:hint="Date (YYYY-MM-DD)"
+            android:focusable="false"
             android:inputType="date"
             android:textColor="@android:color/white"
-            android:textColorHint="#CCCCCC"/>
+            android:textColorHint="#CCCCCC" />
 
+        <!-- Start Date -->
+        <EditText
+            android:id="@+id/edtStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="Start Date (YYYY-MM-DD)"
+            android:focusable="false"
+            android:textColor="@android:color/white"
+            android:textColorHint="#CCCCCC" />
+
+        <!-- End Date -->
+        <EditText
+            android:id="@+id/edtEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:hint="End Date (YYYY-MM-DD)"
+            android:focusable="false"
+            android:textColor="@android:color/white"
+            android:textColorHint="#CCCCCC" />
+
+        <!-- Category Spinner -->
         <Spinner
             android:id="@+id/spinnerCategory"
             android:layout_width="match_parent"
-            android:layout_height="64dp"/>
+            android:layout_height="64dp" />
 
+        <!-- Time Period Spinner -->
         <Spinner
             android:id="@+id/spinnerTimePeriod"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:entries="@array/time_period_options"/>
+            android:entries="@array/time_period_options" />
 
+        <!-- Upload Photo Button -->
         <Button
             android:id="@+id/btnUploadPhoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Upload Photo"
             android:textColor="@android:color/white"
-            android:backgroundTint="@android:color/holo_blue_dark"/>
+            android:backgroundTint="@android:color/holo_blue_dark" />
 
+        <!-- Image Preview -->
+        <ImageView
+            android:id="@+id/imagePreview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:contentDescription="Selected photo preview" />
+
+        <!-- Save Expense Button -->
         <Button
             android:id="@+id/btnSaveExpense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Save Expense"
             android:textColor="@android:color/white"
-            android:backgroundTint="@android:color/holo_green_dark"/>
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:layout_marginTop="16dp" />
 
     </LinearLayout>
 </ScrollView>

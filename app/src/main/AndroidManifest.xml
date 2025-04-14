@@ -23,7 +23,9 @@
         <activity android:name=".LoginActivity" android:exported="true" />
        <activity android:name=".HomeActivity" android:exported="true"/>
         <activity android:name=".RegisterActivity" android:exported="true" />
+        <activity android:name=".AddExpenseActivity" android:exported="true" />
         <activity android:name=".AccountActivity" android:exported="true" />
+        <activity android:name=".BudgetGoalsActivity" android:exported="true" />
 
 
     </application>
