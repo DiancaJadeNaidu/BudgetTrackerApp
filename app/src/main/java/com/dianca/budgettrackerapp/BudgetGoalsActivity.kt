@@ -6,7 +6,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.dianca.budgettrackerapp.data.AppDatabase
+import com.dianca.budgettrackerapp.AppDatabase
 import com.dianca.budgettrackerapp.data.BudgetGoalEntity
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat

@@ -1,13 +1,17 @@
-package com.dianca.budgettrackerapp.data
+package com.dianca.budgettrackerapp
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.dianca.budgettrackerapp.data.BudgetGoalDAO
+import com.dianca.budgettrackerapp.data.BudgetGoalEntity
+import com.dianca.budgettrackerapp.CategoryDAO
+import com.dianca.budgettrackerapp.data.CategoryEntity
 
 @Database(
     entities = [CategoryEntity::class, BudgetGoalEntity::class, ExpenseEntity::class],
-    version = 1, //this number gets incremented everytime there is a change to schema
+    version = 2, //this number gets incremented everytime there is a change to schema
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

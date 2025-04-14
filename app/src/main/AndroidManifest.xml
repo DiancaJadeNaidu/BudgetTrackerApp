@@ -27,6 +27,8 @@
         <activity android:name=".AccountActivity" android:exported="true" />
         <activity android:name=".BudgetGoalsActivity" android:exported="true" />
         <activity android:name=".ReportActivity" android:exported="true" />
+        <activity android:name=".NotificationsActivity" />
+
 
 
     </application>

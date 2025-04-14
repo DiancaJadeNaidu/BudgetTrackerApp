@@ -23,7 +23,7 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         notificationsBtn.setOnClickListener {
-            Toast.makeText(this, "🔔 Notification settings coming soon!", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, NotificationsActivity::class.java))
         }
 
         reportBtn.setOnClickListener {

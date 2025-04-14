@@ -1,4 +1,4 @@
-package com.dianca.budgettrackerapp.data
+package com.dianca.budgettrackerapp
 
 import androidx.room.*
 

@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.dianca.budgettrackerapp.data.AppDatabase
-import com.dianca.budgettrackerapp.data.ExpenseEntity
+import com.dianca.budgettrackerapp.AppDatabase
+import com.dianca.budgettrackerapp.ExpenseEntity
 import com.dianca.budgettrackerapp.databinding.ActivityAddexpenseBinding
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat

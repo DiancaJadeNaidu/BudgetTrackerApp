@@ -1,6 +1,7 @@
-package com.dianca.budgettrackerapp.data
+package com.dianca.budgettrackerapp
 
 import androidx.room.*
+import com.dianca.budgettrackerapp.data.CategoryEntity
 
 @Dao
 interface CategoryDAO {
