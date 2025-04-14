@@ -44,7 +44,7 @@ class HomeActivity : AppCompatActivity() {
 
         // Click listeners
         imgProfile.setOnClickListener {
-            startActivity(Intent(this, AccountActivity::class.java))
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
 
         imgCategories.setOnClickListener {
