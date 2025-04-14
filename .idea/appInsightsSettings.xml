@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.dianca.budgettrackerapp" />
+                  <option name="mobileSdkAppId" value="1:579421800995:android:4d7519560865bdc60e3f96" />
+                  <option name="projectId" value="budgettracker-2dc8f" />
+                  <option name="projectNumber" value="579421800995" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

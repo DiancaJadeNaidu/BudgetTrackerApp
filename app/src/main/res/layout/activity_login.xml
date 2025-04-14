@@ -31,12 +31,12 @@
         android:textStyle="bold"
         android:fontFamily="sans-serif-condensed-medium" />
 
-    <!--allow input from user -> username and password-->
+    <!--allow input from user -> email and password-->
     <EditText
         android:id="@+id/loginUsernameEditText"
         android:layout_width="match_parent"
         android:layout_height="74dp"
-        android:hint="Enter your username"
+        android:hint="Enter your email"
         android:textColor="#FFFFFF"
         android:textColorHint="#B3FFFFFF"
         android:inputType="textEmailAddress"

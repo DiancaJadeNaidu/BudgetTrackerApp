@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,7 +7,6 @@
     android:padding="32dp"
     android:background="@drawable/backgroundimg">
 
-    <!-- Heading: Create account -->
     <TextView
         android:id="@+id/textViewCreateAccount"
         android:layout_width="wrap_content"
@@ -19,9 +17,8 @@
         android:textColor="#FFFFFF"
         android:textSize="40sp"
         android:textStyle="bold"
-        android:fontFamily="sans-serif-smallcaps" />
+        android:fontFamily="sans-serif-smallcaps"/>
 
-    <!-- Subheading: Register -->
     <TextView
         android:id="@+id/textViewRegister"
         android:layout_width="wrap_content"
@@ -34,7 +31,8 @@
         android:fontFamily="sans-serif-condensed-medium"
         android:layout_marginBottom="32dp" />
 
-    <!-- Username input -->
+    <!--allow input from user -> email, password, confirm password-->
+
     <EditText
         android:id="@+id/registerUsernameEditText"
         android:layout_width="match_parent"
@@ -43,46 +41,58 @@
         android:backgroundTint="#B3FFFFFF"
         android:drawableStart="@android:drawable/ic_dialog_email"
         android:drawablePadding="8dp"
-        android:hint="Enter username"
+        android:hint="Enter email"
         android:inputType="textEmailAddress"
         android:paddingStart="16dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#B3FFFFFF"
         android:textSize="16sp" />
 
-    <!-- Password input -->
+    <!--password requirements listed-->
+    <TextView
+        android:id="@+id/textViewPasswordRequirements"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Password must:\n• Be at least 8 characters long\n• Include an uppercase letter\n• Include a lowercase letter\n• Include a number\n• Include a special character"
+        android:textSize="12sp"
+        android:textColor="#B3FFFFFF"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp" />
+
     <EditText
         android:id="@+id/registerPasswordEditText"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="#B3FFFFFF"
-        android:drawableStart="@android:drawable/ic_lock_lock"
-        android:drawablePadding="8dp"
         android:hint="Enter password"
         android:inputType="textPassword"
-        android:paddingStart="16dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#B3FFFFFF"
-        android:textSize="16sp" />
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#B3FFFFFF"
+        android:textSize="16sp"
+        android:paddingStart="16dp"
+        android:drawablePadding="8dp"
+        android:drawableStart="@android:drawable/ic_lock_lock" />
 
-    <!-- Confirm password input -->
+
+
     <EditText
         android:id="@+id/ConfirmRegisterPasswordEditText"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="#B3FFFFFF"
-        android:drawableStart="@android:drawable/ic_secure"
-        android:drawablePadding="15dp"
         android:hint="Confirm password"
         android:inputType="textPassword"
-        android:paddingStart="16dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#B3FFFFFF"
-        android:textSize="16sp" />
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="#B3FFFFFF"
+        android:textSize="16sp"
+        android:paddingStart="16dp"
+        android:drawablePadding="15dp"
+        android:drawableStart="@android:drawable/ic_secure"/>
 
-    <!-- Register button -->
+    <!--button -> registers user-->
     <Button
         android:id="@+id/registerButton"
         android:layout_width="match_parent"
@@ -98,17 +108,18 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <!-- Login redirection button -->
+    <!--button -> directs user to login screen-->
     <Button
         android:id="@+id/goToLoginButton"
         android:layout_width="match_parent"
         android:layout_height="58dp"
-        android:backgroundTint="#03DAC6"
-        android:elevation="2dp"
-        android:stateListAnimator="@null"
         android:text="Already have an account? Login"
-        android:textAllCaps="false"
+        android:backgroundTint="#03DAC6"
         android:textColor="#FFFFFF"
         android:textSize="17sp"
-        android:textStyle="bold" />
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:stateListAnimator="@null"
+        android:elevation="2dp"/>
+
 </LinearLayout>

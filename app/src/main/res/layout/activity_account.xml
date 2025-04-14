@@ -7,16 +7,28 @@
     android:padding="32dp"
     android:background="@drawable/backgroundimg">
 
+    <!--welcome message -->
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/welcome_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username: Dianca"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"
+        android:text="Welcome!"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="8dp" />
 
+    <!-- logged-in email -->
+    <TextView
+        android:id="@+id/email_display"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email: user@example.com"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="24dp" />
+
+    <!-- change password section -->
     <EditText
         android:id="@+id/current_password"
         android:layout_width="match_parent"
@@ -24,7 +36,7 @@
         android:hint="Current Password"
         android:inputType="textPassword"
         android:textColor="@android:color/white"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp" />
 
     <EditText
         android:id="@+id/new_password"
@@ -33,7 +45,7 @@
         android:hint="New Password"
         android:inputType="textPassword"
         android:textColor="@android:color/white"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/btnSavePassword"
@@ -43,15 +55,16 @@
         android:backgroundTint="#5C6BC0"
         android:textColor="@android:color/white"
         android:padding="12dp"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginBottom="32dp" />
 
+    <!-- profile picture -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Profile Picture"
         android:textSize="16sp"
         android:textColor="@android:color/white"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp" />
 
     <ImageView
         android:id="@+id/profile_picture"
@@ -59,8 +72,8 @@
         android:layout_height="120dp"
         android:layout_gravity="center"
         android:src="@drawable/default_profile"
-    android:contentDescription="Profile Picture"
-    android:layout_marginBottom="16dp"/>
+        android:contentDescription="Profile Picture"
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/btnChangeProfilePicture"
@@ -70,8 +83,9 @@
         android:backgroundTint="#8E24AA"
         android:textColor="@android:color/white"
         android:layout_gravity="center"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginBottom="32dp" />
 
+    <!-- delete account -->
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="match_parent"
@@ -83,6 +97,6 @@
         android:padding="14dp"
         android:textSize="18sp"
         android:layout_gravity="center"
-        android:elevation="4dp"/>
+        android:elevation="4dp" />
 
 </LinearLayout>
