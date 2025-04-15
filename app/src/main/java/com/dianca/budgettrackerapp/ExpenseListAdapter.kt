@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dianca.budgettrackerapp.databinding.ItemExpenseBinding
 
 class ExpenseListAdapter(
+    private val onEditClick: (ExpenseEntity) -> Unit,
     private val onDeleteClick: (ExpenseEntity) -> Unit
 ) : RecyclerView.Adapter<ExpenseListAdapter.ExpenseViewHolder>() {
 
@@ -33,7 +34,9 @@ class ExpenseListAdapter(
             binding.txtExpenseAmount.text = "Amount: \$${expense.amount}"
             binding.txtExpensePeriod.text = "Period: ${expense.startDate} - ${expense.endDate}"
             binding.txtCategoryId.text = "Category: ${expense.categoryId}"
+
             binding.btnDelete.setOnClickListener { onDeleteClick(expense) }
+            binding.btnEdit.setOnClickListener { onEditClick(expense) }
         }
     }
 }

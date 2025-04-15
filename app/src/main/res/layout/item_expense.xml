@@ -17,12 +17,14 @@
         android:layout_height="wrap_content"
         android:text="Expense Name"
         android:textStyle="bold"
+        android:textColor="#ffffff"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/txtExpenseAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:text="Amount"
         android:textSize="14sp" />
 
@@ -30,6 +32,7 @@
         android:id="@+id/txtExpensePeriod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:text="Period"
         android:textSize="14sp" />
 
@@ -37,6 +40,7 @@
         android:id="@+id/txtCategoryId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#ffffff"
         android:text="Category ID"
         android:textSize="14sp" />
 

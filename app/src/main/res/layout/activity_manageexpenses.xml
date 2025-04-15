@@ -21,11 +21,12 @@
             android:id="@+id/editTextSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search by expense name"
-            android:inputType="text"
+            android:backgroundTint="#FFFFFF"
             android:drawableStart="@android:drawable/ic_menu_search"
-            android:textColor="#FFFFFF"
-            android:hintTextColor= "#CCCCCC" />
+            android:hint="Search by expense name"
+            android:textColorHint="@color/white"
+            android:inputType="text"
+            android:textColor="@color/white" />
 
         <!-- Filter by max amount using SeekBar -->
         <TextView
