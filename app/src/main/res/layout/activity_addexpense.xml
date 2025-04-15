@@ -83,7 +83,8 @@
         <Spinner
             android:id="@+id/spinnerCategory"
             android:layout_width="match_parent"
-            android:layout_height="64dp" />
+            android:layout_height="64dp"
+            />
 
         <!-- Time Period Spinner -->
         <Spinner
@@ -120,6 +121,15 @@
             android:textColor="@android:color/white"
             android:backgroundTint="@android:color/holo_green_dark"
             android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/btnManageExpenses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manage Expenses"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@android:color/holo_orange_dark"
+            android:layout_marginTop="8dp" />
 
     </LinearLayout>
 </ScrollView>

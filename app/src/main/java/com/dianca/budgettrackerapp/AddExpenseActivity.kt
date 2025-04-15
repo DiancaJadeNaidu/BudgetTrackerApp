@@ -135,5 +135,10 @@ class AddExpenseActivity : AppCompatActivity() {
                 finish()
             }
         }
+        binding.btnManageExpenses.setOnClickListener {
+            val intent = Intent(this, ManageExpensesActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }
