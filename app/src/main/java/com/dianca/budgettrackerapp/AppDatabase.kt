@@ -11,7 +11,7 @@ import com.dianca.budgettrackerapp.data.CategoryEntity
 
 @Database(
     entities = [CategoryEntity::class, BudgetGoalEntity::class, ExpenseEntity::class],
-    version = 2, //this number gets incremented everytime there is a change to schema
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

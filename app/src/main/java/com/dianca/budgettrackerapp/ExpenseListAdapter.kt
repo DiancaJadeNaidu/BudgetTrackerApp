@@ -31,7 +31,7 @@ class ExpenseListAdapter(
     inner class ExpenseViewHolder(private val binding: ItemExpenseBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(expense: ExpenseEntity) {
             binding.txtExpenseName.text = expense.expenseName
-            binding.txtExpenseAmount.text = "Amount: \$${expense.amount}"
+            binding.txtExpenseAmount.text = "Amount: R${expense.amount}"
             binding.txtExpensePeriod.text = "Period: ${expense.startDate} - ${expense.endDate}"
             binding.txtCategoryId.text = "Category: ${expense.categoryId}"
 

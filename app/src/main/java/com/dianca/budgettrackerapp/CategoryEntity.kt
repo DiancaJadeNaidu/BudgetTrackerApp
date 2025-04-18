@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class CategoryEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
-    val color: String // optional for UI distinction
+    val color: String
 )

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dianca.budgettrackerapp.databinding.ActivityManageexpensesBinding
 import kotlinx.coroutines.launch
 
-class ManageExpensesActivity : AppCompatActivity() {
+class ManageExpensesActivity : BaseActivity() {
 
     private lateinit var binding: ActivityManageexpensesBinding
     private lateinit var adapter: ExpenseListAdapter
@@ -22,15 +22,22 @@ class ManageExpensesActivity : AppCompatActivity() {
         binding = ActivityManageexpensesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupBottomNav()
+
         setupRecyclerView()
         loadExpenses()
 
         setupSearchFilter()
         setupAmountFilter()
+
+        setupBottomNav()
     }
 
     private fun setupRecyclerView() {
         adapter = ExpenseListAdapter(
+            onEditClick = { expense ->
+                Toast.makeText(this, "Edit clicked for: ${expense.expenseName}", Toast.LENGTH_SHORT).show()
+            },
             onDeleteClick = { expense ->
                 lifecycleScope.launch {
                     AppDatabase.getInstance(applicationContext).expenseDao().delete(expense)
@@ -43,15 +50,15 @@ class ManageExpensesActivity : AppCompatActivity() {
         binding.recyclerExpenses.adapter = adapter
     }
 
+
     private fun loadExpenses() {
         lifecycleScope.launch {
             val expenses = AppDatabase.getInstance(applicationContext).expenseDao().getAll()
-            allExpenses = expenses  // Save all expenses for later filtering
+            allExpenses = expenses
             adapter.submitList(expenses)
         }
     }
 
-    // Search Filter by Expense Name
     private fun setupSearchFilter() {
         binding.editTextSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -62,12 +69,11 @@ class ManageExpensesActivity : AppCompatActivity() {
         })
     }
 
-    // Amount Filter using SeekBar
     private fun setupAmountFilter() {
         binding.seekBarAmount.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val maxAmount = "R$progress" // Update TextView with the SeekBar value
-                binding.txtSeekBarValue.text = "Max Amount: $maxAmount"
+                val maxAmountText = "R${progress}" // Corrected string interpolation
+                binding.txtSeekBarValue.text = "Max Amount: $maxAmountText"
                 filterExpenses(binding.editTextSearch.text.toString(), progress)
             }
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -75,7 +81,6 @@ class ManageExpensesActivity : AppCompatActivity() {
         })
     }
 
-    // Apply Filters based on search text and max amount
     private fun filterExpenses(searchText: String, maxAmount: Int) {
         val filteredList = allExpenses.filter { expense ->
             val matchesSearch = expense.expenseName.contains(searchText, ignoreCase = true)

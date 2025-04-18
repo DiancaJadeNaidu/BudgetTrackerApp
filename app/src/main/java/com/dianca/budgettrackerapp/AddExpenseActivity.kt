@@ -7,14 +7,11 @@ import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.dianca.budgettrackerapp.AppDatabase
-import com.dianca.budgettrackerapp.ExpenseEntity
 import com.dianca.budgettrackerapp.databinding.ActivityAddexpenseBinding
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.util.*
 
-class AddExpenseActivity : AppCompatActivity() {
+class AddExpenseActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAddexpenseBinding
     private var selectedImageUri: Uri? = null
@@ -24,12 +21,17 @@ class AddExpenseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddexpenseBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_addexpense)
+
+        setupBottomNav()
 
         setupDatePickers()
         setupCategorySpinner()
         setupUploadPhoto()
         setupSaveButton()
+
+
+
     }
 
     private fun setupDatePickers() {
@@ -59,7 +61,8 @@ class AddExpenseActivity : AppCompatActivity() {
                 .getAll()
 
             if (categories.isEmpty()) {
-                Toast.makeText(this@AddExpenseActivity, "No categories found", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AddExpenseActivity, "No categories found", Toast.LENGTH_SHORT)
+                    .show()
                 return@launch
             }
 
@@ -73,13 +76,19 @@ class AddExpenseActivity : AppCompatActivity() {
 
             binding.spinnerCategory.adapter = adapter
 
-            binding.spinnerCategory.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>, view: android.view.View?, position: Int, id: Long) {
-                    selectedCategoryId = categories[position].id
-                }
+            binding.spinnerCategory.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>,
+                        view: android.view.View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        selectedCategoryId = categories[position].id
+                    }
 
-                override fun onNothingSelected(parent: AdapterView<*>) {}
-            }
+                    override fun onNothingSelected(parent: AdapterView<*>) {}
+                }
         }
     }
 
@@ -110,16 +119,16 @@ class AddExpenseActivity : AppCompatActivity() {
             val timePeriod = binding.spinnerTimePeriod.selectedItem.toString()
 
             if (description.isEmpty() || expenseName.isEmpty() || amount == null || dateStr.isEmpty() || startDateStr.isEmpty() || endDateStr.isEmpty()) {
-                Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please fill in all required fields", Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
             }
 
-            //directly use the date string instead of converting it to Date
             val expense = ExpenseEntity(
                 categoryId = selectedCategoryId,
                 amount = amount,
                 description = description,
-                timestamp = System.currentTimeMillis(), //using the current time for timestamp
+                timestamp = System.currentTimeMillis(),
                 startDate = startDateStr,
                 endDate = endDateStr,
                 expenseName = expenseName,
@@ -135,10 +144,10 @@ class AddExpenseActivity : AppCompatActivity() {
                 finish()
             }
         }
+
         binding.btnManageExpenses.setOnClickListener {
             val intent = Intent(this, ManageExpensesActivity::class.java)
             startActivity(intent)
         }
-
     }
 }

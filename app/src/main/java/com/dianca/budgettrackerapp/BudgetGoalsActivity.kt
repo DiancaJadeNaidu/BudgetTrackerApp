@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BudgetGoalsActivity : AppCompatActivity() {
+class BudgetGoalsActivity : BaseActivity() {
 
     private lateinit var edtMinBudget: EditText
     private lateinit var edtMaxBudget: EditText
@@ -27,6 +27,8 @@ class BudgetGoalsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_budget_goals)
+
+        setupBottomNav()
 
         edtMinBudget = findViewById(R.id.edtMinBudget)
         edtMaxBudget = findViewById(R.id.edtMaxBudget)
@@ -44,14 +46,14 @@ class BudgetGoalsActivity : AppCompatActivity() {
         seekBarMaxBudget.progress = 500
         edtMinBudget.setText("100")
         edtMaxBudget.setText("500")
-        txtMinSeek.text = "Min Budget: $100"
-        txtMaxSeek.text = "Max Budget: $500"
+        txtMinSeek.text = "Min Budget: R100"
+        txtMaxSeek.text = "Max Budget: R500"
 
         // SeekBar listeners
         seekBarMinBudget.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 edtMinBudget.setText(progress.toString())
-                txtMinSeek.text = "Min Budget: $$progress"
+                txtMinSeek.text = "Min Budget: R$progress"
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -61,7 +63,7 @@ class BudgetGoalsActivity : AppCompatActivity() {
         seekBarMaxBudget.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 edtMaxBudget.setText(progress.toString())
-                txtMaxSeek.text = "Max Budget: $$progress"
+                txtMaxSeek.text = "Max Budget: R$progress"
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -114,8 +116,8 @@ class BudgetGoalsActivity : AppCompatActivity() {
                             edtMaxBudget.setText("")
                             seekBarMinBudget.progress = 0
                             seekBarMaxBudget.progress = 0
-                            txtMinSeek.text = "Min Budget: $0"
-                            txtMaxSeek.text = "Max Budget: $0"
+                            txtMinSeek.text = "Min Budget: R0"
+                            txtMaxSeek.text = "Max Budget: R0"
                         } catch (e: Exception) {
                             Toast.makeText(this@BudgetGoalsActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
                         }

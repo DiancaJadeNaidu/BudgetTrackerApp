@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainCoordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundimg">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="32dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal|top">
+
+            <TextView
+                android:id="@+id/welcome_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome!"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/email_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email: user@example.com"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="24dp" />
+
+            <EditText
+                android:id="@+id/current_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Current Password"
+                android:inputType="textPassword"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp" />
+
+            <EditText
+                android:id="@+id/new_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="New Password"
+                android:inputType="textPassword"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp" />
+
+            <Button
+                android:id="@+id/btnSavePassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save New Password"
+                android:backgroundTint="#5C6BC0"
+                android:textColor="@android:color/white"
+                android:padding="12dp"
+                android:layout_marginBottom="32dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profile Picture"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="8dp" />
+
+            <ImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:src="@drawable/default_profile"
+                android:contentDescription="Profile Picture"
+                android:layout_marginBottom="16dp" />
+
+            <Button
+                android:id="@+id/btnChangeProfilePicture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change Profile Picture"
+                android:backgroundTint="#8E24AA"
+                android:textColor="@android:color/white"
+                android:layout_gravity="center"
+                android:layout_marginBottom="32dp" />
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#A60808"
+                android:text="Delete My Account"
+                android:textColor="@android:color/white"
+                android:padding="14dp"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:elevation="4dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>

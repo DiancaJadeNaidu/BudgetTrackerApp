@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/backgroundimg"
-    android:padding="24dp"
-    android:gravity="center_vertical">
+    android:background="@drawable/backgroundimg">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNav"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
     <!-- Issue Description Input -->
     <EditText
@@ -15,7 +24,7 @@
         android:layout_height="wrap_content"
         android:hint="Describe the issue..."
         android:padding="16dp"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
         android:textColorHint="#BDBDBD"
         android:textSize="16sp" />
 
@@ -32,7 +41,6 @@
         android:backgroundTint="#f48fb1"
         android:elevation="6dp" />
 
-    <!-- Info Text -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,3 +52,16 @@
         android:padding="8dp"
         android:fontFamily="sans-serif-medium" />
 </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        app:menu="@menu/bottom_nav_menu" />
+
+</RelativeLayout>

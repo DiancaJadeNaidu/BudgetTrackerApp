@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 
-class NotificationsActivity : AppCompatActivity() {
+class NotificationsActivity : BaseActivity() {
 
     private lateinit var generalSwitch: Switch
     private lateinit var promoSwitch: Switch
@@ -16,20 +16,18 @@ class NotificationsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notifications)
 
-        // Initialize switches
+        setupBottomNav()
+
         generalSwitch = findViewById(R.id.general_notifications_switch)
         promoSwitch = findViewById(R.id.promotional_notifications_switch)
         alertSwitch = findViewById(R.id.alert_notifications_switch)
 
-        // Setup SharedPreferences to save settings
         sharedPreferences = getSharedPreferences("notification_prefs", MODE_PRIVATE)
 
-        // Load saved switch states
         generalSwitch.isChecked = sharedPreferences.getBoolean("general", false)
         promoSwitch.isChecked = sharedPreferences.getBoolean("promotional", false)
         alertSwitch.isChecked = sharedPreferences.getBoolean("alert", false)
 
-        // Set listeners for switches to save preferences
         generalSwitch.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean("general", isChecked).apply()
         }
@@ -41,5 +39,6 @@ class NotificationsActivity : AppCompatActivity() {
         alertSwitch.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean("alert", isChecked).apply()
         }
+        setupBottomNav()
     }
 }

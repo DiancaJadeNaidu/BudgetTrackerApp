@@ -1,86 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundimg">
 
-    <LinearLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set Budget Goals"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Min Budget -->
+            <EditText
+                android:id="@+id/edtMinBudget"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:hint="Minimum Budget"
+                android:inputType="numberDecimal"
+                android:textColor="@android:color/white"
+                android:textColorHint="#BDBDBD"
+                android:backgroundTint="#BB86FC"
+                android:layout_marginBottom="12dp" />
+
+            <SeekBar
+                android:id="@+id/seekBarMinBudget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:thumbTint="#BB86FC"
+                android:progressTint="#BB86FC" />
+
+            <TextView
+                android:id="@+id/txtMinSeekValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Min Budget: R0"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Max Budget -->
+            <EditText
+                android:id="@+id/edtMaxBudget"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:hint="Maximum Budget"
+                android:inputType="numberDecimal"
+                android:textColor="@android:color/white"
+                android:textColorHint="#BDBDBD"
+                android:backgroundTint="#BB86FC"
+                android:layout_marginBottom="12dp" />
+
+            <SeekBar
+                android:id="@+id/seekBarMaxBudget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:thumbTint="#BB86FC"
+                android:progressTint="#BB86FC" />
+
+            <TextView
+                android:id="@+id/txtMaxSeekValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max Budget: R0"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="20dp" />
+
+            <Button
+                android:id="@+id/btnSaveBudget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save Goals"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:backgroundTint="#f48fb1"
+                android:layout_marginTop="12dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        app:menu="@menu/bottom_nav_menu" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Set Budget Goals"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Min Budget -->
-        <EditText
-            android:id="@+id/edtMinBudget"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:hint="Minimum Budget"
-            android:inputType="numberDecimal"
-            android:textColor="@android:color/white"
-            android:textColorHint="#BDBDBD"
-            android:backgroundTint="#BB86FC"
-            android:layout_marginBottom="12dp" />
-
-        <SeekBar
-            android:id="@+id/seekBarMinBudget"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:thumbTint="#BB86FC"
-            android:progressTint="#BB86FC" />
-
-        <TextView
-            android:id="@+id/txtMinSeekValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Min Budget: R0"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Max Budget -->
-        <EditText
-            android:id="@+id/edtMaxBudget"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:hint="Maximum Budget"
-            android:inputType="numberDecimal"
-            android:textColor="@android:color/white"
-            android:textColorHint="#BDBDBD"
-            android:backgroundTint="#BB86FC"
-            android:layout_marginBottom="12dp" />
-
-        <SeekBar
-            android:id="@+id/seekBarMaxBudget"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:thumbTint="#BB86FC"
-            android:progressTint="#BB86FC" />
-
-        <TextView
-            android:id="@+id/txtMaxSeekValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Max Budget: R0"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="20dp" />
-
-        <Button
-            android:id="@+id/btnSaveBudget"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save Goals"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:backgroundTint="#f48fb1"
-            android:layout_marginTop="12dp" />
-    </LinearLayout>
-</ScrollView>
+</RelativeLayout>
