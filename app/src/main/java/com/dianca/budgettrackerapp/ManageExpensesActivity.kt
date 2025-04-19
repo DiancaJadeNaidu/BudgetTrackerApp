@@ -1,11 +1,16 @@
 package com.dianca.budgettrackerapp
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dianca.budgettrackerapp.databinding.ActivityManageexpensesBinding
@@ -17,20 +22,41 @@ class ManageExpensesActivity : BaseActivity() {
     private lateinit var adapter: ExpenseListAdapter
     private var allExpenses: List<ExpenseEntity> = emptyList()
 
+    // For requesting permissions
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                // Permission granted, proceed with loading expenses
+                loadExpenses()
+            } else {
+                // Permission denied, show a message to the user
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityManageexpensesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Set up bottom navigation (you may already have this)
         setupBottomNav()
+
+        // Check if the app has permission to read external storage
+        if (ContextCompat.checkSelfPermission(
+                this, Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            // Permission granted, proceed with loading expenses
+            loadExpenses()
+        } else {
+            // Request permission
+            requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
 
         setupRecyclerView()
-        loadExpenses()
-
         setupSearchFilter()
         setupAmountFilter()
-
-        setupBottomNav()
     }
 
     private fun setupRecyclerView() {
@@ -49,7 +75,6 @@ class ManageExpensesActivity : BaseActivity() {
         binding.recyclerExpenses.layoutManager = LinearLayoutManager(this)
         binding.recyclerExpenses.adapter = adapter
     }
-
 
     private fun loadExpenses() {
         lifecycleScope.launch {

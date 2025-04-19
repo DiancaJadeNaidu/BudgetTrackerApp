@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:layout_marginTop="8dp"
+    android:elevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:background="@drawable/backgroundimg"
+        android:orientation="vertical">
+
+        <!-- Expense Name -->
+        <TextView
+            android:id="@+id/tvExpenseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Expense Name"
+            android:textSize="18sp"
+            android:textColor="@android:color/holo_green_light"
+            android:textStyle="bold" />
+
+        <!-- Category (Optional) -->
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Category"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="4dp" />
+
+        <!-- Amount -->
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Amount: R100.00"
+            android:textSize="16sp"
+            android:textColor="@android:color/holo_blue_bright"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold" />
+
+        <!-- Date Range -->
+        <TextView
+            android:id="@+id/tvDateRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Date - End Date"
+            android:textSize="12sp"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="8dp" />
+
+        <!-- Image (Optional) -->
+        <ImageView
+            android:id="@+id/ivExpenseImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_placeholder_image"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.imgViewExpenses.setOnClickListener {
-            // startActivity(Intent(activity, ViewExpensesActivity::class.java))
+             startActivity(Intent(activity, ViewExpensesActivity::class.java))
         }
 
         binding.imgCategorySummary.setOnClickListener {

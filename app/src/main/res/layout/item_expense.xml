@@ -43,6 +43,23 @@
         android:text="Category ID"
         android:textSize="14sp" />
 
+    <TextView
+        android:id="@+id/txtDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:text="Description"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/imgExpensePreview"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="Expense Image Preview"
+        android:scaleType="centerCrop"
+        android:background="#cccccc"  />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

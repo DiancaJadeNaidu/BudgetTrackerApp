@@ -1,14 +1,19 @@
 package com.dianca.budgettrackerapp
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.app.DownloadManager
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.dianca.budgettrackerapp.databinding.ActivityAddexpenseBinding
 import kotlinx.coroutines.launch
+import java.io.File
 import java.util.*
 
 class AddExpenseActivity : BaseActivity() {
@@ -21,7 +26,7 @@ class AddExpenseActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddexpenseBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_addexpense)
+        setContentView(binding.root)
 
         setupBottomNav()
 
@@ -94,19 +99,31 @@ class AddExpenseActivity : BaseActivity() {
 
     private fun setupUploadPhoto() {
         binding.btnUploadPhoto.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            startActivityForResult(intent, PICK_IMAGE_REQUEST)
+            val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
+                type = "image/*"
+            }
+            Toast.makeText(this, "Tip: Tap ☰ or Gallery/Downloads", Toast.LENGTH_LONG).show()
+            startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST)
         }
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
-            selectedImageUri = data?.data
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
+            selectedImageUri = data.data // <-- this was missing
+
             binding.imagePreview.setImageURI(selectedImageUri)
+
+            Toast.makeText(this, "Image uploaded!", Toast.LENGTH_SHORT).show()
+
+            // Optional log for debugging
+            Log.d("AddExpenseActivity", "Image URI selected: $selectedImageUri")
         }
     }
+
+
 
     private fun setupSaveButton() {
         binding.btnSaveExpense.setOnClickListener {
