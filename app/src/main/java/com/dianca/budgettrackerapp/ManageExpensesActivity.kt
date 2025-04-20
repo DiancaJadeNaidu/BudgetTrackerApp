@@ -78,11 +78,20 @@ class ManageExpensesActivity : BaseActivity() {
 
     private fun loadExpenses() {
         lifecycleScope.launch {
-            val expenses = AppDatabase.getInstance(applicationContext).expenseDao().getAll()
-            allExpenses = expenses
-            adapter.submitList(expenses)
+            val db = AppDatabase.getInstance(applicationContext)
+            val expenses = db.expenseDao().getAll()
+            val categories = db.categoryDao().getAll()
+
+            val expensesWithCategoryName = expenses.map { expense ->
+                val categoryName = categories.find { it.id == expense.categoryId }?.name ?: "Unknown"
+                expense.copy(expenseName = "${expense.expenseName} ($categoryName)")
+            }
+
+            allExpenses = expensesWithCategoryName
+            adapter.submitList(expensesWithCategoryName)
         }
     }
+
 
     private fun setupSearchFilter() {
         binding.editTextSearch.addTextChangedListener(object : TextWatcher {

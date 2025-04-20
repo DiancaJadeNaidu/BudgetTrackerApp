@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.imgCategories.setOnClickListener {
-            // startActivity(Intent(activity, CategoriesActivity::class.java))
+             startActivity(Intent(activity, AddCategoryActivity::class.java))
         }
 
         binding.imgAddExpense.setOnClickListener {
@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.imgCategorySummary.setOnClickListener {
-            // startActivity(Intent(activity, CategorySummaryActivity::class.java))
+             startActivity(Intent(activity, ManageCategoryActivity::class.java))
         }
 
         binding.imgGraph.setOnClickListener {

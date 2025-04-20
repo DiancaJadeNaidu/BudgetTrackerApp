@@ -35,6 +35,8 @@
         <activity android:name=".ProfileActivity" android:exported="true" />
         <activity android:name=".HomeActivity" android:exported="true" />
         <activity android:name=".ViewExpensesActivity" android:exported="true" />
+        <activity android:name=".AddCategoryActivity" android:exported="true" />
+        <activity android:name=".ManageCategoryActivity" android:exported="true" />
 
 
 

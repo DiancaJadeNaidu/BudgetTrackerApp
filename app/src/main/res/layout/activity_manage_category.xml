@@ -20,21 +20,51 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Expenses"
+        android:text="Manage Categories"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/white"
+        android:layout_gravity="center"
         android:layout_marginBottom="16dp" />
 
     <ListView
-        android:id="@+id/lvExpenses"
+        android:id="@+id/lvCategories"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
         android:divider="@android:color/white"
         android:dividerHeight="1dp" />
-</LinearLayout>
-    </ScrollView>
 
+    <!-- Buttons layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnResetAll"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Reset All"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btnBackToAdd"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@android:color/darker_gray"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+        </LinearLayout>
+</ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
@@ -44,5 +74,4 @@
         app:itemIconTint="@android:color/holo_blue_bright"
         app:itemTextColor="@android:color/holo_blue_bright"
         app:menu="@menu/bottom_nav_menu" />
-
-</RelativeLayout>
+    </RelativeLayout>

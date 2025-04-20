@@ -11,7 +11,7 @@ import com.dianca.budgettrackerapp.data.CategoryEntity
 
 @Database(
     entities = [CategoryEntity::class, BudgetGoalEntity::class, ExpenseEntity::class],
-    version = 2,
+    version = 1,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
