@@ -1,22 +1,27 @@
 package com.dianca.budgettrackerapp
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.widget.*
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
+import android.view.MotionEvent
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ListView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.dianca.budgettrackerapp.BaseActivity
 import com.dianca.budgettrackerapp.data.CategoryEntity
 import kotlinx.coroutines.launch
 
 class ManageCategoryActivity : BaseActivity() {
 
     private lateinit var categoryDao: CategoryDAO
-    private lateinit var listView: ListView
-    private lateinit var adapter: ArrayAdapter<String>
-    private lateinit var btnReset: Button
-    private lateinit var btnBack: Button
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: CategoryAdapter
     private val categoryList = mutableListOf<CategoryEntity>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,44 +29,50 @@ class ManageCategoryActivity : BaseActivity() {
         setContentView(R.layout.activity_manage_category)
 
         setupBottomNav()
-        // UI elements
-        listView = findViewById(R.id.lvCategories)
-        btnReset = findViewById(R.id.btnResetAll)
-        btnBack = findViewById(R.id.btnBackToAdd)
 
-        // Adapter setup
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, mutableListOf())
-        listView.adapter = adapter
+        // UI elements
+        recyclerView = findViewById(R.id.recyclerViewCategories)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Database setup
         val db = AppDatabase.getInstance(this)
         categoryDao = db.categoryDao()
 
-        // Observe categories and update ListView
+        // Adapter setup
+        adapter = CategoryAdapter(categoryList)
+        recyclerView.adapter = adapter
+
+        // Observe categories and update RecyclerView
         categoryDao.getAllCategories().observe(this, Observer { categories ->
             categoryList.clear()
             categoryList.addAll(categories)
-            adapter.clear()
-            adapter.addAll(categories.map { it.name })
             adapter.notifyDataSetChanged()
         })
 
         // Short click: show a Toast (for now)
-        listView.setOnItemClickListener { _, _, position, _ ->
-            val selected = categoryList[position]
-            Toast.makeText(this, "Clicked: ${selected.name}", Toast.LENGTH_SHORT).show()
-
-            // 🔜 Later: Navigate to expenses for this category
-        }
+        recyclerView.addOnItemTouchListener(object : RecyclerView.SimpleOnItemTouchListener() {
+            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                val view = rv.findChildViewUnder(e.x, e.y)
+                val position = rv.getChildAdapterPosition(view!!)
+                val selected = categoryList[position]
+                Toast.makeText(this@ManageCategoryActivity, "Clicked: ${selected.name}", Toast.LENGTH_SHORT).show()
+                return super.onInterceptTouchEvent(rv, e)
+            }
+        })
 
         // Long click: show edit/delete options
-        listView.setOnItemLongClickListener { _, _, position, _ ->
-            val selected = categoryList[position]
-            showOptionsDialog(selected)
-            true
-        }
+        recyclerView.addOnItemTouchListener(object : RecyclerView.SimpleOnItemTouchListener() {
+            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                val view = rv.findChildViewUnder(e.x, e.y)
+                val position = rv.getChildAdapterPosition(view!!)
+                val selected = categoryList[position]
+                showOptionsDialog(selected)
+                return true
+            }
+        })
 
         // Reset all categories
+        val btnReset: Button = findViewById(R.id.btnResetAll)
         btnReset.setOnClickListener {
             AlertDialog.Builder(this)
                 .setTitle("Confirm Reset")
@@ -79,6 +90,7 @@ class ManageCategoryActivity : BaseActivity() {
         }
 
         // Back to AddCategory screen
+        val btnBack: Button = findViewById(R.id.btnBackToAdd)
         btnBack.setOnClickListener {
             val intent = Intent(this, AddCategoryActivity::class.java)
             startActivity(intent)
