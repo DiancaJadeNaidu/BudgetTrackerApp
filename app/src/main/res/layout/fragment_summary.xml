@@ -11,6 +11,7 @@
         android:id="@+id/startDateBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_blue_dark"
         android:text="Select Start Date" />
 
     <TextView
@@ -24,6 +25,7 @@
         android:id="@+id/endDateBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:text="Select End Date" />
 
     <TextView
@@ -37,6 +39,7 @@
         android:id="@+id/loadSummaryBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_purple"
         android:text="Load Summary" />
 
     <TextView

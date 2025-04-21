@@ -66,18 +66,22 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="8dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="16dp"
+                android:gravity="center_horizontal">
 
                 <Button
                     android:id="@+id/startDateButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Select Start Date" />
+                    android:backgroundTint="@android:color/holo_blue_dark"
+                    android:text="Select Start Date"
+                    android:layout_marginEnd="8dp"/>
 
                 <Button
                     android:id="@+id/endDateButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/holo_green_dark"
                     android:text="Select End Date" />
 
             </LinearLayout>
