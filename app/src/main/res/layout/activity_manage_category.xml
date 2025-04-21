@@ -51,6 +51,15 @@
                     android:text="Reset All"
                     android:backgroundTint="@android:color/holo_red_dark"
                     android:textColor="@android:color/white" />
+                <Button
+                    android:id="@+id/btnSummary"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Summary"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="@android:color/holo_blue_dark"
+                    android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/btnBackToAdd"

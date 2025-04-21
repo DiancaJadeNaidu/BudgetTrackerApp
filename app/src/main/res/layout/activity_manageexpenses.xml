@@ -17,58 +17,80 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-    <!-- Filtering Options -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="16dp">
+            <!-- Filtering Options -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="16dp">
 
-        <!-- Filter by name -->
-        <EditText
-            android:id="@+id/editTextSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#FFFFFF"
-            android:drawableStart="@android:drawable/ic_menu_search"
-            android:hint="Search by expense name"
-            android:textColorHint="@color/white"
-            android:inputType="text"
-            android:textColor="@color/white" />
+                <!-- Filter by name -->
+                <EditText
+                    android:id="@+id/editTextSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
+                    android:drawableStart="@android:drawable/ic_menu_search"
+                    android:hint="Search by expense name"
+                    android:textColorHint="@color/white"
+                    android:inputType="text"
+                    android:textColor="@color/white" />
 
-        <!-- Filter by max amount using SeekBar -->
-        <TextView
-            android:id="@+id/txtMaxAmountLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Filter by max amount: R"
-            android:textColor="@color/white" />
+                <!-- Filter by max amount using SeekBar -->
+                <TextView
+                    android:id="@+id/txtMaxAmountLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Filter by max amount: R"
+                    android:textColor="@color/white" />
 
-        <SeekBar
-            android:id="@+id/seekBarAmount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="10000" />
+                <SeekBar
+                    android:id="@+id/seekBarAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="10000" />
 
-        <TextView
-            android:id="@+id/txtSeekBarValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Max Amount: R1000"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/white" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/txtSeekBarValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Max Amount: R1000"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/white" />
+            </LinearLayout>
 
-    <!-- Expense List -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerExpenses"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingTop="8dp" />
+            <!-- Date Pickers -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="16dp">
 
-</LinearLayout>
+                <Button
+                    android:id="@+id/startDateButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select Start Date" />
+
+                <Button
+                    android:id="@+id/endDateButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select End Date" />
+
+            </LinearLayout>
+
+            <!-- Expense List -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerExpenses"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingTop="8dp" />
+
+        </LinearLayout>
     </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -81,6 +103,4 @@
         app:itemTextColor="@android:color/holo_blue_bright"
         app:menu="@menu/bottom_nav_menu" />
 
-    </RelativeLayout>
-
-
+</RelativeLayout>

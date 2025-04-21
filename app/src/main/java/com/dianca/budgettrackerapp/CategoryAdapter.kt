@@ -23,7 +23,6 @@ class CategoryAdapter(private val categories: List<CategoryEntity>) : RecyclerVi
     inner class CategoryViewHolder(private val binding: ItemCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(category: CategoryEntity) {
             binding.txtCategoryName.text = category.name
-            // Handle other category views here if needed, like image, description, etc.
         }
     }
 }

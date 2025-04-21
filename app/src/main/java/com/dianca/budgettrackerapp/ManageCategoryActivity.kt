@@ -30,6 +30,12 @@ class ManageCategoryActivity : BaseActivity() {
 
         setupBottomNav()
 
+        val btnSummary: Button = findViewById(R.id.btnSummary)
+        btnSummary.setOnClickListener {
+            val intent = Intent(this, SummaryActivity::class.java)
+            startActivity(intent)
+        }
+
         // UI elements
         recyclerView = findViewById(R.id.recyclerViewCategories)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -131,4 +137,5 @@ class ManageCategoryActivity : BaseActivity() {
             .setNegativeButton("Cancel", null)
             .show()
     }
+
 }

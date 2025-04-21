@@ -19,6 +19,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun categoryDao(): CategoryDAO
     abstract fun expenseDao(): ExpenseDAO
     abstract fun budgetGoalDAO(): BudgetGoalDAO
+    abstract fun expenseSummaryDao(): ExpenseSummaryDAO
 
     companion object {
         @Volatile
