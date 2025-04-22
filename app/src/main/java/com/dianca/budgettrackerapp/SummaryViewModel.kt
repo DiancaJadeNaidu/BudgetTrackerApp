@@ -20,10 +20,11 @@ class SummaryViewModel(application: Application) : AndroidViewModel(application)
         val categories = categoryDao.getAll()
 
         for (category in categories) {
-            val total = summaryDao.getTotalByCategoryWithinPeriod(category.id, startTime, endTime)
+            val totalNumber: Number? = summaryDao.getTotalByCategoryWithinPeriod(category.id, startTime, endTime)
+            val total = totalNumber?.toDouble() ?: 0.0  // ✅ safely convert to Double
             result.add(category.name to total)
         }
 
         return result
-    }
+        }
 }

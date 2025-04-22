@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.dianca.budgettrackerapp.databinding.FragmentSummaryBinding
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -46,13 +47,16 @@ class SummaryFragment : Fragment() {
             if (startDate != null && endDate != null) {
                 lifecycleScope.launch {
                     val results = viewModel.getTotalsByCategory(startDate!!, endDate!!)
-                    val summaryText = results.joinToString("\n") { "${it.first}: R${String.format("%.2f", it.second)}" }
+                    val currencyFormat = NumberFormat.getCurrencyInstance(Locale("en", "ZA"))
+                    val summaryText = results.joinToString("\n") { "${it.first}: ${currencyFormat.format(it.second)}" }
                     binding.resultsText.text = summaryText
                 }
             } else {
                 Toast.makeText(requireContext(), "Please select both dates", Toast.LENGTH_SHORT).show()
             }
         }
+
+
 
         return binding.root
     }

@@ -25,6 +25,15 @@
                 android:textColor="@android:color/white"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click on each Category to edit or delete"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp" />
 
             <!-- RecyclerView for Categories -->
             <androidx.recyclerview.widget.RecyclerView

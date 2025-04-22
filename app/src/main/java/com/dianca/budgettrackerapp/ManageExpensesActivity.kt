@@ -100,9 +100,7 @@ class ManageExpensesActivity : BaseActivity() {
 
     private fun setupRecyclerView() {
         adapter = ExpenseListAdapter(
-            onEditClick = { expense ->
-                Toast.makeText(this, "Edit clicked for: ${expense.expenseName}", Toast.LENGTH_SHORT).show()
-            },
+
             onDeleteClick = { expense ->
                 lifecycleScope.launch {
                     AppDatabase.getInstance(applicationContext).expenseDao().delete(expense)

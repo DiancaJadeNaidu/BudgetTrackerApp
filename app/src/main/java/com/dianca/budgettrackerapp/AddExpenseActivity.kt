@@ -112,7 +112,6 @@ class AddExpenseActivity : BaseActivity() {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
             selectedImageUri = data.data
 
-            // ✅ Take persistable URI permission here
             selectedImageUri?.let { uri ->
                 val takeFlags: Int = data.flags and
                         (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
@@ -124,7 +123,6 @@ class AddExpenseActivity : BaseActivity() {
                 }
             }
 
-            // Show image preview
             binding.imagePreview.setImageURI(selectedImageUri)
 
             Toast.makeText(this, "Image uploaded!", Toast.LENGTH_SHORT).show()
@@ -132,9 +130,6 @@ class AddExpenseActivity : BaseActivity() {
             Log.d("AddExpenseActivity", "Image URI selected: $selectedImageUri")
         }
     }
-
-
-
 
     private fun setupSaveButton() {
         binding.btnSaveExpense.setOnClickListener {

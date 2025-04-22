@@ -34,12 +34,12 @@ class AddCategoryActivity : BaseActivity() {
             if (name.isNotEmpty()) {
                 lifecycleScope.launch {
                     try {
-                        // Log before inserting
+
                         println("Inserting category: $name")
                         categoryDAO.insertCategory(CategoryEntity(name = name))
                         runOnUiThread {
                             Toast.makeText(this@AddCategoryActivity, "Category added!", Toast.LENGTH_SHORT).show()
-                            edtCategory.setText("") // ✅ Remain on this screen
+                            edtCategory.setText("")
                         }
                     } catch (e: Exception) {
                         // Log the error

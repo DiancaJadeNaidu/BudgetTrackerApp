@@ -53,13 +53,7 @@
             android:textColor="@android:color/black"
             android:layout_marginBottom="12dp" />
 
-        <Button
-            android:id="@+id/btnBack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Back"
-            android:backgroundTint="@android:color/darker_gray"
-            android:textColor="@android:color/white" />
+
     </LinearLayout>
 </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView

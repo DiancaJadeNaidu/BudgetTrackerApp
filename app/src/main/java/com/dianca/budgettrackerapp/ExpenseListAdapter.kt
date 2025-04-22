@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.dianca.budgettrackerapp.databinding.ItemExpenseBinding
 
 class ExpenseListAdapter(
-    private val onEditClick: (ExpenseEntity) -> Unit,
     private val onDeleteClick: (ExpenseEntity) -> Unit
 ) : RecyclerView.Adapter<ExpenseListAdapter.ExpenseViewHolder>() {
 
@@ -39,7 +38,6 @@ class ExpenseListAdapter(
             binding.txtExpenseName.text = expense.expenseName
             binding.txtExpenseAmount.text = "Amount: R${expense.amount}"
             binding.txtExpensePeriod.text = "Period: ${expense.startDate} - ${expense.endDate}"
-            binding.txtCategoryId.text = "Category: ${expense.categoryId}"
             binding.txtDescription.text = "Description: ${expense.description}"
 
             if (!expense.imagePath.isNullOrEmpty()) {
@@ -47,7 +45,7 @@ class ExpenseListAdapter(
                 Log.d("ExpenseAdapter", "Parsed URI: $uri")
 
                 Glide.with(binding.root.context)
-                    .load(uri)      // optional
+                    .load(uri)
                     .into(binding.imgExpensePreview)
 
             } else {
@@ -57,7 +55,6 @@ class ExpenseListAdapter(
             }
 
             binding.btnDelete.setOnClickListener { onDeleteClick(expense) }
-            binding.btnEdit.setOnClickListener { onEditClick(expense) }
         }
     }
 }
