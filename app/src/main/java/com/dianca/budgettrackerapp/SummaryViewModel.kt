@@ -21,7 +21,7 @@ class SummaryViewModel(application: Application) : AndroidViewModel(application)
 
         for (category in categories) {
             val totalNumber: Number? = summaryDao.getTotalByCategoryWithinPeriod(category.id, startTime, endTime)
-            val total = totalNumber?.toDouble() ?: 0.0  // ✅ safely convert to Double
+            val total = totalNumber?.toDouble() ?: 0.0
             result.add(category.name to total)
         }
 

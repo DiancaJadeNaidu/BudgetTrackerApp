@@ -42,7 +42,7 @@ class AddCategoryActivity : BaseActivity() {
                             edtCategory.setText("")
                         }
                     } catch (e: Exception) {
-                        // Log the error
+
                         e.printStackTrace()
                         runOnUiThread {
                             Toast.makeText(this@AddCategoryActivity, "Error adding category: ${e.message}", Toast.LENGTH_SHORT).show()
