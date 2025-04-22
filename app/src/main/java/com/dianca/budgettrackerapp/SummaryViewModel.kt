@@ -25,6 +25,7 @@ class SummaryViewModel(application: Application) : AndroidViewModel(application)
             result.add(category.name to total)
         }
 
+
         return result
         }
 }
