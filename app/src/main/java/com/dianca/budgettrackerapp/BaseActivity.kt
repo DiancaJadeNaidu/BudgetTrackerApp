@@ -40,6 +40,8 @@ abstract class BaseActivity : AppCompatActivity() {
         for (i in 0 until bottomNav.menu.size()) {
             bottomNav.menu.getItem(i).isChecked = false
         }
+
     }
+
 
 }

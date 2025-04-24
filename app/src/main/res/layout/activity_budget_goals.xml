@@ -95,6 +95,17 @@
                 android:backgroundTint="#f48fb1"
                 android:layout_marginTop="12dp" />
 
+            <TextView
+                android:id="@+id/txtDisplayGoals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your Budget Goals for [Month] will appear here"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp" />
+
+
         </LinearLayout>
     </ScrollView>
 

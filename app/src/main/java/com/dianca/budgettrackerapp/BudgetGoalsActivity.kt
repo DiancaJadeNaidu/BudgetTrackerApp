@@ -82,6 +82,7 @@ class BudgetGoalsActivity : BaseActivity() {
                     if (it in 0..maxSeekLimit) seekBarMinBudget.progress = it
                 }
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
@@ -93,6 +94,7 @@ class BudgetGoalsActivity : BaseActivity() {
                     if (it in 0..maxSeekLimit) seekBarMaxBudget.progress = it
                 }
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
@@ -117,28 +119,55 @@ class BudgetGoalsActivity : BaseActivity() {
                     lifecycleScope.launch {
                         try {
                             db.budgetGoalDAO().insert(goal)
-                            Toast.makeText(this@BudgetGoalsActivity, "Budget goals saved!", Toast.LENGTH_SHORT).show()
-                            //reset UI
+                            Toast.makeText(
+                                this@BudgetGoalsActivity,
+                                "Budget goals saved!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            // Fetch and display saved budget goals
+                            val savedGoals = db.budgetGoalDAO().getGoalsForMonth(currentMonth)
+                            if (savedGoals.isNotEmpty()) {
+                                val savedGoal =
+                                    savedGoals[0] //assuming there is only one goal for the month
+                                val displayText =
+                                    "Min Budget for ${currentMonth}: R${savedGoal.minGoalAmount}\n" +
+                                            "Max Budget for ${currentMonth}: R${savedGoal.maxGoalAmount}"
+
+                                //update the TextView to show saved goals
+                                val txtDisplayGoals: TextView = findViewById(R.id.txtDisplayGoals)
+                                txtDisplayGoals.text = displayText
+                            }
+
+                            //reset the UI after displaying the saved goals
                             edtMinBudget.setText("")
                             edtMaxBudget.setText("")
                             seekBarMinBudget.progress = 0
                             seekBarMaxBudget.progress = 0
                             txtMinSeek.text = "Min Budget: R0"
                             txtMaxSeek.text = "Max Budget: R0"
+
                         } catch (e: Exception) {
-                            Toast.makeText(this@BudgetGoalsActivity, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                this@BudgetGoalsActivity,
+                                "Error: ${e.message}",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     }
                 } else {
-                    Toast.makeText(this, "Minimum budget cannot be greater than maximum budget.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Minimum budget cannot be greater than maximum budget.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } else {
                 Toast.makeText(this, "Please enter valid numbers.", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
-    //returns formatted current month
+        //returns formatted current month
     private fun getCurrentMonthFormatted(): String {
         val dateFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
         return dateFormat.format(Date())

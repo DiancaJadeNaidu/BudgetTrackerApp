@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.dianca.budgettrackerapp.databinding.FragmentHomeBinding
@@ -69,6 +70,7 @@ class HomeFragment : Fragment() {
         //placeholder for navigating to graph activity
         binding.imgGraph.setOnClickListener {
             //startActivity(Intent(activity, GraphActivity::class.java))
+            Toast.makeText(requireContext(), "Feature coming soon", Toast.LENGTH_SHORT).show()
         }
         return binding.root
     }

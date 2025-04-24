@@ -3,6 +3,7 @@ package com.dianca.budgettrackerapp
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Switch
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class NotificationsActivity : BaseActivity() {
@@ -38,16 +39,18 @@ class NotificationsActivity : BaseActivity() {
         //save changes when the general notification switch is toggled
         generalSwitch.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean("general", isChecked).apply()
+            Toast.makeText(this, "General notifications ${if (isChecked) "enabled" else "disabled"}", Toast.LENGTH_SHORT).show()
         }
 
         //save changes when the promotional notification switch is toggled
         promoSwitch.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean("promotional", isChecked).apply()
+            Toast.makeText(this, "Promotional notifications ${if (isChecked) "enabled" else "disabled"}", Toast.LENGTH_SHORT).show()
         }
-
         //save changes when the alert notification switch is toggled
         alertSwitch.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean("alert", isChecked).apply()
+            Toast.makeText(this, "Alert notifications ${if (isChecked) "enabled" else "disabled"}", Toast.LENGTH_SHORT).show()
         }
         //set up bottom navigation again
         setupBottomNav()
