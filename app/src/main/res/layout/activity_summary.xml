@@ -7,10 +7,12 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundimg">
 
+    <!--display bottom navigation bar-->
     <include
         android:id="@+id/baseLayout"
         layout="@layout/activity_base_with_nav" />
 
+    <!--container -> loads fragments (screens)-->
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="419dp"

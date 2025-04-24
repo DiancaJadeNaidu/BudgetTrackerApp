@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundimg">
 
+    <!--scrollview -> vertical scrolling of content-->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -12,50 +13,53 @@
         android:layout_above="@id/bottomNav"
         android:padding="24dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Category"
-            android:textColor="@android:color/white"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
-
-        <EditText
-            android:id="@+id/edtCategoryName"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:hint="Enter Category Name"
-            android:textColor="@android:color/white"
-            android:textColorHint="#CCCCCC"
-            android:layout_marginBottom="12dp" />
-
-        <Button
-            android:id="@+id/btnAddCategory"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Category"
-            android:backgroundTint="#f48fb1"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="12dp" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnGoToManage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Go to Manage Categories"
-            android:backgroundTint="#03DAC6"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="12dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Category"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp" />
 
+            <!--field to enter input for a category name-->
+            <EditText
+                android:id="@+id/edtCategoryName"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:hint="Enter Category Name"
+                android:textColor="@android:color/white"
+                android:textColorHint="#CCCCCC"
+                android:layout_marginBottom="12dp" />
 
-    </LinearLayout>
-</ScrollView>
+            <!--button -> adds and saves category in app and database-->
+            <Button
+                android:id="@+id/btnAddCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Category"
+                android:backgroundTint="#f48fb1"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="12dp" />
+
+            <!--button -> redirects to all categories-->
+            <Button
+                android:id="@+id/btnGoToManage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Go to Manage Categories"
+                android:backgroundTint="#03DAC6"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="12dp" />
+
+            <!--navigation bar display at the bottom of the screen-->
+        </LinearLayout>
+    </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
@@ -65,4 +69,4 @@
         app:itemIconTint="@android:color/holo_blue_bright"
         app:itemTextColor="@android:color/holo_blue_bright"
         app:menu="@menu/bottom_nav_menu" />
-   </RelativeLayout>
+</RelativeLayout>

@@ -6,7 +6,8 @@
     android:background="@drawable/backgroundimg"
     android:padding="24dp">
 
-    <!-- Title -->
+    <!--all hardcoded for now-->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,15 +17,14 @@
         android:textColor="@android:color/white"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Graph Section -->
-
-    <!-- Progress Dashboard Section -->
-
+    <!--graph section-->
+    <!--progress dashboard section-->
     <LinearLayout
         android:layout_width="393dp"
         android:layout_height="286dp"
         android:orientation="vertical">
 
+        <!--image of bar graph-->
         <ImageView
             android:layout_width="342dp"
             android:layout_height="300dp"
@@ -49,7 +49,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <!-- Food Budget -->
+        <!--category food budget-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,6 +65,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
 
+            <!--total amount spent-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,6 +74,7 @@
                 android:textSize="15sp" />
         </LinearLayout>
 
+        <!--progress bar representing progress visually-->
         <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
@@ -82,7 +84,7 @@
             android:progress="17"
             android:progressDrawable="@drawable/progress_bar_style" />
 
-        <!-- Entertainment Budget -->
+        <!--category entertainment budget-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -115,7 +117,7 @@
             android:progress="100"
             android:progressDrawable="@drawable/progress_bar_style" />
 
-        <!-- Transport Budget -->
+        <!--category transport budget-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -148,7 +150,7 @@
             android:progress="67"
             android:progressDrawable="@drawable/progress_bar_style" />
 
-        <!-- Shopping Budget -->
+        <!--category shopping budget-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -182,7 +184,7 @@
             android:progressDrawable="@drawable/progress_bar_style" />
 
 
-        <!-- Other Budget -->
+        <!--category other budget-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

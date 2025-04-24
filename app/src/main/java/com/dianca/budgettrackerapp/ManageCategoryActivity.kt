@@ -28,34 +28,36 @@ class ManageCategoryActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manage_category)
 
+        //setup bottom navigation bar
         setupBottomNav()
 
+        //button to navigate to SummaryActivity
         val btnSummary: Button = findViewById(R.id.btnSummary)
         btnSummary.setOnClickListener {
             val intent = Intent(this, SummaryActivity::class.java)
             startActivity(intent)
         }
 
-        // UI elements
+        //UI elements
         recyclerView = findViewById(R.id.recyclerViewCategories)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Database setup
+        //database setup
         val db = AppDatabase.getInstance(this)
         categoryDao = db.categoryDao()
 
-        // Adapter setup
+        //adapter setup
         adapter = CategoryAdapter(categoryList)
         recyclerView.adapter = adapter
 
-        // Observe categories and update RecyclerView
+        //observe categories and update RecyclerView
         categoryDao.getAllCategories().observe(this, Observer { categories ->
             categoryList.clear()
             categoryList.addAll(categories)
             adapter.notifyDataSetChanged()
         })
 
-        // Short click: show a Toast (for now)
+        //short click -> show a Toast (for now)
         recyclerView.addOnItemTouchListener(object : RecyclerView.SimpleOnItemTouchListener() {
             override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
                 val view = rv.findChildViewUnder(e.x, e.y)
@@ -66,7 +68,7 @@ class ManageCategoryActivity : BaseActivity() {
             }
         })
 
-        // Long click: show edit/delete options
+        //long click -> show edit/delete options
         recyclerView.addOnItemTouchListener(object : RecyclerView.SimpleOnItemTouchListener() {
             override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
                 val view = rv.findChildViewUnder(e.x, e.y)
@@ -77,7 +79,7 @@ class ManageCategoryActivity : BaseActivity() {
             }
         })
 
-        // Reset all categories
+        //reset/delete all categories
         val btnReset: Button = findViewById(R.id.btnResetAll)
         btnReset.setOnClickListener {
             AlertDialog.Builder(this)
@@ -95,7 +97,7 @@ class ManageCategoryActivity : BaseActivity() {
                 .show()
         }
 
-        // Back to AddCategory screen
+        //button to go back to AddCategory screen
         val btnBack: Button = findViewById(R.id.btnBackToAdd)
         btnBack.setOnClickListener {
             val intent = Intent(this, AddCategoryActivity::class.java)
@@ -104,6 +106,7 @@ class ManageCategoryActivity : BaseActivity() {
         }
     }
 
+    //dialog to choose between editing or deleting a category
     private fun showOptionsDialog(category: CategoryEntity) {
         val options = arrayOf("Edit", "Delete")
         AlertDialog.Builder(this)
@@ -119,6 +122,7 @@ class ManageCategoryActivity : BaseActivity() {
             .show()
     }
 
+    //dialog to edit a category's name
     private fun showEditDialog(category: CategoryEntity) {
         val input = EditText(this)
         input.setText(category.name)

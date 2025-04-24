@@ -28,15 +28,20 @@ class AddExpenseActivity : BaseActivity() {
         binding = ActivityAddexpenseBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //set up bottom navigation
         setupBottomNav()
-
+        //initialize date pickers for input fields
         setupDatePickers()
+        //load categories into spinner
         setupCategorySpinner()
+        //handle image upload
         setupUploadPhoto()
+        //handle saving expense and navigating to manage screen
         setupSaveButton()
 
     }
 
+    //show date picker dialog for selected EditText
     private fun setupDatePickers() {
         val calendar = Calendar.getInstance()
 
@@ -57,11 +62,13 @@ class AddExpenseActivity : BaseActivity() {
         binding.edtEndDate.setOnClickListener { showDatePicker(binding.edtEndDate) }
     }
 
+    //loads category names into spinner and stores selected category ID
     private fun setupCategorySpinner() {
         lifecycleScope.launch {
             val categories = AppDatabase.getInstance(applicationContext)
                 .categoryDao()
                 .getAll()
+
 
             if (categories.isEmpty()) {
                 Toast.makeText(this@AddExpenseActivity, "No categories found", Toast.LENGTH_SHORT)
@@ -95,6 +102,7 @@ class AddExpenseActivity : BaseActivity() {
         }
     }
 
+    //opens image picker when upload photo button is clicked
     private fun setupUploadPhoto() {
         binding.btnUploadPhoto.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
@@ -105,7 +113,7 @@ class AddExpenseActivity : BaseActivity() {
         }
     }
 
-
+    //handles image selection and preview
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -131,6 +139,7 @@ class AddExpenseActivity : BaseActivity() {
         }
     }
 
+    //saves expense and details to database
     private fun setupSaveButton() {
         binding.btnSaveExpense.setOnClickListener {
             val description = binding.edtExpenseDescription.text.toString().trim()
@@ -168,6 +177,7 @@ class AddExpenseActivity : BaseActivity() {
             }
         }
 
+        //directs to manage expenses screen
         binding.btnManageExpenses.setOnClickListener {
             val intent = Intent(this, ManageExpensesActivity::class.java)
             startActivity(intent)

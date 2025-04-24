@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundimg">
 
+    <!--scrollview -> vertical scrolling of content-->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -17,7 +18,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Heading -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="16dp"/>
 
-            <!-- Expense Name -->
+            <!--field to enter input for expense name-->
             <EditText
                 android:id="@+id/edtExpenseName"
                 android:layout_width="match_parent"
@@ -36,7 +36,7 @@
                 android:textColor="@android:color/white"
                 android:textColorHint="#CCCCCC" />
 
-            <!-- Description -->
+            <!--field to enter input for description-->
             <EditText
                 android:id="@+id/edtExpenseDescription"
                 android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                 android:textColor="@android:color/white"
                 android:textColorHint="#CCCCCC" />
 
-            <!-- Amount -->
+            <!--field to enter input for amount-->
             <EditText
                 android:id="@+id/edtExpenseAmount"
                 android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:textColor="@android:color/white"
                 android:textColorHint="#CCCCCC" />
 
-            <!-- Expense Date -->
+            <!--field to enter input for expense date-->
             <EditText
                 android:id="@+id/edtExpenseDate"
                 android:layout_width="match_parent"
@@ -66,7 +66,7 @@
                 android:textColor="@android:color/white"
                 android:textColorHint="#CCCCCC" />
 
-            <!-- Start Date -->
+            <!--field to enter input for start date-->
             <EditText
                 android:id="@+id/edtStartDate"
                 android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                 android:textColor="@android:color/white"
                 android:textColorHint="#CCCCCC" />
 
-            <!-- End Date -->
+            <!--field to enter input for end date-->
             <EditText
                 android:id="@+id/edtEndDate"
                 android:layout_width="match_parent"
@@ -86,20 +86,20 @@
                 android:textColor="@android:color/white"
                 android:textColorHint="#CCCCCC" />
 
-            <!-- Category Spinner -->
+            <!--category spinner-->
             <Spinner
                 android:id="@+id/spinnerCategory"
                 android:layout_width="match_parent"
                 android:layout_height="64dp" />
 
-            <!-- Time Period Spinner -->
+            <!--time period spinner-->
             <Spinner
                 android:id="@+id/spinnerTimePeriod"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:entries="@array/time_period_options" />
 
-            <!-- Upload Photo Button -->
+            <!--button -> to upload a photo-->
             <Button
                 android:id="@+id/btnUploadPhoto"
                 android:layout_width="match_parent"
@@ -108,7 +108,7 @@
                 android:textColor="@android:color/white"
                 android:backgroundTint="@android:color/holo_blue_dark" />
 
-            <!-- Image Preview -->
+            <!--image preview displayed after upload-->
             <ImageView
                 android:id="@+id/imagePreview"
                 android:layout_width="match_parent"
@@ -118,7 +118,7 @@
                 android:visibility="gone"
                 android:contentDescription="Selected photo preview" />
 
-            <!-- Save Expense Button -->
+            <!--button -> saves expense in category-->
             <Button
                 android:id="@+id/btnSaveExpense"
                 android:layout_width="match_parent"
@@ -128,7 +128,7 @@
                 android:backgroundTint="@android:color/holo_green_dark"
                 android:layout_marginTop="16dp" />
 
-            <!-- Manage Expenses Button -->
+            <!--button -> redirects to manage expenses screen (search expenses)-->
             <Button
                 android:id="@+id/btnManageExpenses"
                 android:layout_width="match_parent"
@@ -140,6 +140,7 @@
         </LinearLayout>
     </ScrollView>
 
+    <!--navigation bar display at the bottom of the screen-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"

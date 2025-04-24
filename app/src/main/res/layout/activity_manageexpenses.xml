@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundimg">
 
+    <!--scrollview -> vertical scrolling of content-->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -17,14 +18,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Filtering Options -->
+            <!--filtering options-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="16dp">
 
-                <!-- Filter by name -->
+                <!--filter by name-->
                 <EditText
                     android:id="@+id/editTextSearch"
                     android:layout_width="match_parent"
@@ -36,7 +37,7 @@
                     android:inputType="text"
                     android:textColor="@color/white" />
 
-                <!-- Filter by max amount using SeekBar -->
+                <!--filter by maximum amount using seekbar-->
                 <TextView
                     android:id="@+id/txtMaxAmountLabel"
                     android:layout_width="wrap_content"
@@ -60,7 +61,7 @@
                     android:textColor="@color/white" />
             </LinearLayout>
 
-            <!-- Date Pickers -->
+            <!--date pickers -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,6 +70,7 @@
                 android:paddingBottom="16dp"
                 android:gravity="center_horizontal">
 
+                <!--button -> to choose a start date-->
                 <Button
                     android:id="@+id/startDateButton"
                     android:layout_width="wrap_content"
@@ -77,6 +79,7 @@
                     android:text="Select Start Date"
                     android:layout_marginEnd="8dp"/>
 
+                <!--button -> to choose an end date-->
                 <Button
                     android:id="@+id/endDateButton"
                     android:layout_width="wrap_content"
@@ -86,7 +89,7 @@
 
             </LinearLayout>
 
-            <!-- Expense List -->
+            <!--expense list-->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerExpenses"
                 android:layout_width="match_parent"
@@ -97,6 +100,7 @@
         </LinearLayout>
     </ScrollView>
 
+    <!--navigation bar display at the bottom of the screen-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"

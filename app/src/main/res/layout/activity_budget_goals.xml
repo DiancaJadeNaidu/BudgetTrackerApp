@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundimg">
 
+    <!--scrollview -> vertical scrolling of content-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,7 +26,7 @@
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Min Budget -->
+            <!--field to enter minimum budget-->
             <EditText
                 android:id="@+id/edtMinBudget"
                 android:layout_width="match_parent"
@@ -37,6 +38,7 @@
                 android:backgroundTint="#BB86FC"
                 android:layout_marginBottom="12dp" />
 
+            <!--seekbar -> to adjust minimum budget value-->
             <SeekBar
                 android:id="@+id/seekBarMinBudget"
                 android:layout_width="match_parent"
@@ -44,6 +46,7 @@
                 android:thumbTint="#BB86FC"
                 android:progressTint="#BB86FC" />
 
+            <!--display current minimum budget selected by seekbar-->
             <TextView
                 android:id="@+id/txtMinSeekValue"
                 android:layout_width="wrap_content"
@@ -52,7 +55,7 @@
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Max Budget -->
+            <!--field to enter maximum budget-->
             <EditText
                 android:id="@+id/edtMaxBudget"
                 android:layout_width="match_parent"
@@ -64,6 +67,7 @@
                 android:backgroundTint="#BB86FC"
                 android:layout_marginBottom="12dp" />
 
+            <!--seekbar -> to adjust maximum budget value-->
             <SeekBar
                 android:id="@+id/seekBarMaxBudget"
                 android:layout_width="match_parent"
@@ -71,6 +75,7 @@
                 android:thumbTint="#BB86FC"
                 android:progressTint="#BB86FC" />
 
+            <!--display current maximum budget selected by seekbar-->
             <TextView
                 android:id="@+id/txtMaxSeekValue"
                 android:layout_width="wrap_content"
@@ -79,6 +84,7 @@
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="20dp" />
 
+            <!--button -> saves both budget goals-->
             <Button
                 android:id="@+id/btnSaveBudget"
                 android:layout_width="match_parent"
@@ -92,6 +98,7 @@
         </LinearLayout>
     </ScrollView>
 
+    <!--navigation bar display at the bottom of the screen-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"

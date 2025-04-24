@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundimg">
 
+    <!--scrollview -> vertical scrolling of content-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,6 +38,7 @@
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="24dp" />
 
+            <!--field to enter current password (to verify)-->
             <EditText
                 android:id="@+id/current_password"
                 android:layout_width="match_parent"
@@ -47,6 +49,7 @@
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="16dp" />
 
+            <!--field to enter a new password-->
             <EditText
                 android:id="@+id/new_password"
                 android:layout_width="match_parent"
@@ -57,6 +60,7 @@
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="16dp" />
 
+            <!--button -> saves new password in app and firebase-->
             <Button
                 android:id="@+id/btnSavePassword"
                 android:layout_width="match_parent"
@@ -75,6 +79,7 @@
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="8dp" />
 
+            <!--profile image displayed-->
             <ImageView
                 android:id="@+id/profile_picture"
                 android:layout_width="120dp"
@@ -84,6 +89,7 @@
                 android:contentDescription="Profile Picture"
                 android:layout_marginBottom="16dp" />
 
+            <!--button -> to change profile picture-->
             <Button
                 android:id="@+id/btnChangeProfilePicture"
                 android:layout_width="wrap_content"
@@ -94,6 +100,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="32dp" />
 
+            <!--button -> to delete entire account-->
             <Button
                 android:id="@+id/btnDelete"
                 android:layout_width="match_parent"
@@ -110,4 +117,4 @@
         </LinearLayout>
     </ScrollView>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

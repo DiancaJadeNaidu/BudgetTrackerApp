@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundimg">
 
+    <!--scrollview -> vertical scrolling of content-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <!--displays profile image of user-->
                 <ImageView
                     android:id="@+id/imgProfile"
                     android:layout_width="60dp"
@@ -67,6 +69,7 @@
                     android:layout_height="150dp"
                     android:layout_margin="8dp">
 
+                    <!--image -> navigates to add category screen-->
                     <ImageView
                         android:id="@+id/imgCategories"
                         android:layout_width="match_parent"
@@ -93,6 +96,7 @@
                     android:layout_height="150dp"
                     android:layout_margin="8dp">
 
+                    <!--image -> navigates to add expense screen-->
                     <ImageView
                         android:id="@+id/imgAddExpense"
                         android:layout_width="match_parent"
@@ -126,6 +130,7 @@
                     android:layout_height="150dp"
                     android:layout_margin="8dp">
 
+                    <!--image -> navigates to budget goals screen-->
                     <ImageView
                         android:id="@+id/imgBudgetGoals"
                         android:layout_width="match_parent"
@@ -152,6 +157,7 @@
                     android:layout_height="150dp"
                     android:layout_margin="8dp">
 
+                    <!--image -> navigates to view expenses screen-->
                     <ImageView
                         android:id="@+id/imgViewExpenses"
                         android:layout_width="match_parent"
@@ -185,6 +191,7 @@
                     android:layout_height="150dp"
                     android:layout_margin="8dp">
 
+                    <!--image -> navigates to manage categories screen-->
                     <ImageView
                         android:id="@+id/imgCategorySummary"
                         android:layout_width="match_parent"
@@ -211,6 +218,7 @@
                     android:layout_height="150dp"
                     android:layout_margin="8dp">
 
+                    <!--image -> navigates to dashboard screen-->
                     <ImageView
                         android:id="@+id/imgGraph"
                         android:layout_width="match_parent"

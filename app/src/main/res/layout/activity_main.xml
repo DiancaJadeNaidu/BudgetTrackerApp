@@ -16,6 +16,7 @@
         app:cardCornerRadius="16dp"
         app:cardElevation="8dp">
 
+        <!--company logo image - DARA-->
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
@@ -56,6 +57,7 @@
         android:textSize="16sp"
         android:textStyle="bold" />
 
+    <!--button -> redirects to login screen-->
     <Button
         android:id="@+id/StartButton"
         android:layout_width="match_parent"

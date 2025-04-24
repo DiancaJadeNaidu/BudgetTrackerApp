@@ -7,7 +7,9 @@
     android:gravity="center"
     android:background="@drawable/backgroundimg"
     android:padding="24dp">
->
+
+    <!--all hardcoded for now-->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,6 +54,7 @@
         android:gravity="center_vertical"
         android:layout_marginBottom="16dp">
 
+        <!--medal image -> represents budget master-->
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -89,6 +92,7 @@
         android:gravity="center_vertical"
         android:layout_marginBottom="16dp">
 
+        <!--star image -> represents expense tracker-->
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"

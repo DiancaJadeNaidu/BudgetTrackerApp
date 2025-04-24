@@ -7,6 +7,7 @@
     android:padding="16dp"
     android:background="@drawable/backgroundimg">
 
+    <!--button - select a start date (from calendar)-->
     <Button
         android:id="@+id/startDateBtn"
         android:layout_width="match_parent"
@@ -21,6 +22,7 @@
         android:text="No date selected"
         android:textColor="@color/white"/>
 
+    <!--button - select an end date (from calendar)-->
     <Button
         android:id="@+id/endDateBtn"
         android:layout_width="match_parent"
@@ -35,6 +37,7 @@
         android:textColor="@color/white"
         android:text="No date selected" />
 
+    <!--button -> loads summary of categories between start and end date-->
     <Button
         android:id="@+id/loadSummaryBtn"
         android:layout_width="match_parent"
@@ -42,6 +45,7 @@
         android:backgroundTint="@android:color/holo_purple"
         android:text="Load Summary" />
 
+    <!--displays categories-->
     <TextView
         android:id="@+id/resultsText"
         android:layout_width="match_parent"

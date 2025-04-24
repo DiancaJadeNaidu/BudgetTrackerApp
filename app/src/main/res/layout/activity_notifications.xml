@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundimg">
 
+    <!--scrollview -> vertical scrolling of content-->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -12,56 +13,57 @@
         android:layout_above="@id/bottomNav"
         android:padding="24dp">
 
+        <!--switches for notification preferences (can be enabled/disabled)-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-    <!-- General Notifications Switch -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enable General Notifications"
-        android:textColor="@android:color/white"
-        android:textSize="16sp" />
+            <!--general notifications switch-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enable General Notifications"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
 
-    <Switch
-        android:id="@+id/general_notifications_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            <Switch
+                android:id="@+id/general_notifications_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <!-- Promotional Notifications Switch -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enable Promotional Notifications"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp" />
+            <!--promotional notifications switch-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enable Promotional Notifications"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp" />
 
-    <Switch
-        android:id="@+id/promotional_notifications_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            <Switch
+                android:id="@+id/promotional_notifications_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <!-- Alert Notifications Switch -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Enable Alert Notifications"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        android:layout_marginTop="16dp" />
+            <!--alert notifications switch-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enable Alert Notifications"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp" />
 
-    <Switch
-        android:id="@+id/alert_notifications_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            <Switch
+                android:id="@+id/alert_notifications_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
 
-</LinearLayout>
+        </LinearLayout>
     </ScrollView>
-
+    <!--navigation bar display at the bottom of the screen-->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"

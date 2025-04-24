@@ -11,6 +11,7 @@ import com.dianca.budgettrackerapp.data.CategoryEntity
 
 class AddCategoryActivity : BaseActivity() {
 
+    //declare UI components and DAO
     private lateinit var categoryDAO: CategoryDAO
     private lateinit var edtCategory: EditText
     private lateinit var btnAdd: Button
@@ -20,21 +21,25 @@ class AddCategoryActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_category)
 
+        //set up bottom navigation from base activity
         setupBottomNav()
 
+        //link UI components with layout views
         edtCategory = findViewById(R.id.edtCategoryName)
         btnAdd = findViewById(R.id.btnAddCategory)
         btnGoToManage = findViewById(R.id.btnGoToManage)
 
+        //initialize database and DAO
         val db = AppDatabase.getInstance(this)
         categoryDAO = db.categoryDao()
 
+        //handle add category button click
         btnAdd.setOnClickListener {
             val name = edtCategory.text.toString().trim()
             if (name.isNotEmpty()) {
                 lifecycleScope.launch {
                     try {
-
+                        //insert new category into database
                         println("Inserting category: $name")
                         categoryDAO.insertCategory(CategoryEntity(name = name))
                         runOnUiThread {
@@ -50,11 +55,12 @@ class AddCategoryActivity : BaseActivity() {
                     }
                 }
             } else {
+                //display message if input is empty
                 Toast.makeText(this, "Please enter a category name", Toast.LENGTH_SHORT).show()
             }
         }
 
-
+        //redirect to manage category screen
         btnGoToManage.setOnClickListener {
             startActivity(Intent(this, ManageCategoryActivity::class.java))
         }
