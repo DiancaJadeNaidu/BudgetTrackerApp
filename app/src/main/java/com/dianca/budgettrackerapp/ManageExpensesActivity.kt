@@ -23,7 +23,8 @@ class ManageExpensesActivity : BaseActivity() {
     private lateinit var binding: ActivityManageexpensesBinding
     private lateinit var adapter: ExpenseListAdapter
     private var allExpenses: List<ExpenseEntity> = emptyList()
-    private val dateFormat = SimpleDateFormat("YYYY-MM-DD", Locale.getDefault())
+    //next line not working?? will check later
+  //  private val dateFormat = SimpleDateFormat("YYYY-MM-DD", Locale.getDefault())
     private var startDate: Calendar? = null
     private var endDate: Calendar? = null
 
@@ -156,17 +157,17 @@ class ManageExpensesActivity : BaseActivity() {
             val matchesSearch = expense.expenseName.contains(searchText, ignoreCase = true)
             val matchesAmount = expense.amount <= maxAmount
 
-            // Parse the expense's start and end dates using the `parseDate` method
+            //Parse the expense's start and end dates using the `parseDate` method
             val expenseStartCal = parseDate(expense.startDate)
             val expenseEndCal = parseDate(expense.endDate)
 
-            // Date filtering logic
+            //Date filtering logic
             val matchesDate = when {
                 startDate != null && endDate != null -> {
                     val start = trimTime(startDate!!)
                     val end = trimTime(endDate!!)
 
-                    // Ensure the expense dates are within the selected range
+                    //Ensure the expense start and end dates are within the selected range
                     (expenseStartCal != null && !expenseStartCal.before(start) && !expenseStartCal.after(end)) ||
                             (expenseEndCal != null && !expenseEndCal.before(start) && !expenseEndCal.after(end))
                 }
@@ -180,7 +181,7 @@ class ManageExpensesActivity : BaseActivity() {
                     (expenseStartCal != null && !expenseStartCal.after(end)) ||
                             (expenseEndCal != null && !expenseEndCal.after(end))
                 }
-                else -> true // No date filters applied
+                else -> true //No date filters applied
             }
 
             matchesSearch && matchesAmount && matchesDate
@@ -193,7 +194,8 @@ class ManageExpensesActivity : BaseActivity() {
     private fun parseDate(dateStr: String?): Calendar? {
         return try {
             if (dateStr.isNullOrBlank()) return null
-            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())  // Update to dd/MM/yyyy
+            //note must always be 'yyyy' not 'YYYY'
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) //corrected date format
             val date = dateFormat.parse(dateStr)
             Calendar.getInstance().apply {
                 time = date!!
@@ -206,10 +208,6 @@ class ManageExpensesActivity : BaseActivity() {
             null
         }
     }
-
-
-
-
     private fun trimTime(calendar: Calendar): Calendar {
         return Calendar.getInstance().apply {
             timeInMillis = calendar.timeInMillis
