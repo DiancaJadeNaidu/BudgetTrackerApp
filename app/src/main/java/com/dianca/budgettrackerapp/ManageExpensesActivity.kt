@@ -157,17 +157,17 @@ class ManageExpensesActivity : BaseActivity() {
             val matchesSearch = expense.expenseName.contains(searchText, ignoreCase = true)
             val matchesAmount = expense.amount <= maxAmount
 
-            //Parse the expense's start and end dates using the `parseDate` method
+            //parse the expense's start and end dates using the `parseDate` method
             val expenseStartCal = parseDate(expense.startDate)
             val expenseEndCal = parseDate(expense.endDate)
 
-            //Date filtering logic
+            //date filtering logic
             val matchesDate = when {
                 startDate != null && endDate != null -> {
                     val start = trimTime(startDate!!)
                     val end = trimTime(endDate!!)
 
-                    //Ensure the expense start and end dates are within the selected range
+                    //ensure the expense start and end dates are within the selected range
                     (expenseStartCal != null && !expenseStartCal.before(start) && !expenseStartCal.after(end)) ||
                             (expenseEndCal != null && !expenseEndCal.before(start) && !expenseEndCal.after(end))
                 }
@@ -181,7 +181,7 @@ class ManageExpensesActivity : BaseActivity() {
                     (expenseStartCal != null && !expenseStartCal.after(end)) ||
                             (expenseEndCal != null && !expenseEndCal.after(end))
                 }
-                else -> true //No date filters applied
+                else -> true //no date filters applied
             }
 
             matchesSearch && matchesAmount && matchesDate
@@ -189,7 +189,6 @@ class ManageExpensesActivity : BaseActivity() {
 
         adapter.submitList(filteredList)
     }
-
 
     private fun parseDate(dateStr: String?): Calendar? {
         return try {
