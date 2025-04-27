@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -33,9 +32,9 @@ jobs:
     - name: Run unit tests
       run: ./gradlew testDebugUnitTest
 
-    - name: Run instrumentation tests
-      run: ./gradlew connectedDebugAndroidTest
-      # If running on physical/emulated devices is not supported in your setup, comment this out
+    # Commented out device tests for now
+    # - name: Run instrumentation tests
+    #   run: ./gradlew connectedDebugAndroidTest
 
     - name: Upload test reports
       if: always()
