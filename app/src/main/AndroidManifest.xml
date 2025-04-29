@@ -54,5 +54,4 @@
         <activity android:name=".SummaryActivity" android:exported="true" />
 
     </application>
-
 </manifest>

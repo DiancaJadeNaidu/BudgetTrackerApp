@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //using firebase for authorization
+        //using firebase for authorisation
         auth = FirebaseAuth.getInstance()
 
         binding.loginButton.setOnClickListener {
