@@ -3,6 +3,7 @@ package com.dianca.budgettrackerapp
 import android.Manifest
 import android.app.DatePickerDialog
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -44,18 +45,26 @@ class ManageExpensesActivity : BaseActivity() {
 
         setupBottomNav()
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        val readPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Manifest.permission.READ_MEDIA_IMAGES
+        } else {
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        }
+
+        if (ContextCompat.checkSelfPermission(this, readPermission)
             == PackageManager.PERMISSION_GRANTED
         ) {
             loadExpenses()
         } else {
-            requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            requestPermissionLauncher.launch(readPermission)
         }
 
         setupRecyclerView()
         setupSearchFilter()
         setupAmountFilter()
         setupDatePickers()
+
+
     }
 
     private fun setupDatePickers() {
