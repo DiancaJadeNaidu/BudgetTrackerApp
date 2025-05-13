@@ -3,6 +3,7 @@ package com.dianca.budgettrackerapp
 import android.Manifest
 import android.app.DatePickerDialog
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -23,7 +24,8 @@ class ManageExpensesActivity : BaseActivity() {
     private lateinit var binding: ActivityManageexpensesBinding
     private lateinit var adapter: ExpenseListAdapter
     private var allExpenses: List<ExpenseEntity> = emptyList()
-    private val dateFormat = SimpleDateFormat("YYYY-MM-DD", Locale.getDefault())
+    //next line not working?? will check later
+  //  private val dateFormat = SimpleDateFormat("YYYY-MM-DD", Locale.getDefault())
     private var startDate: Calendar? = null
     private var endDate: Calendar? = null
 
@@ -43,18 +45,26 @@ class ManageExpensesActivity : BaseActivity() {
 
         setupBottomNav()
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        val readPermission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Manifest.permission.READ_MEDIA_IMAGES
+        } else {
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        }
+
+        if (ContextCompat.checkSelfPermission(this, readPermission)
             == PackageManager.PERMISSION_GRANTED
         ) {
             loadExpenses()
         } else {
-            requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            requestPermissionLauncher.launch(readPermission)
         }
 
         setupRecyclerView()
         setupSearchFilter()
         setupAmountFilter()
         setupDatePickers()
+
+
     }
 
     private fun setupDatePickers() {
@@ -156,17 +166,17 @@ class ManageExpensesActivity : BaseActivity() {
             val matchesSearch = expense.expenseName.contains(searchText, ignoreCase = true)
             val matchesAmount = expense.amount <= maxAmount
 
-            // Parse the expense's start and end dates using the `parseDate` method
+            //parse the expense's start and end dates using the `parseDate` method
             val expenseStartCal = parseDate(expense.startDate)
             val expenseEndCal = parseDate(expense.endDate)
 
-            // Date filtering logic
+            //date filtering logic
             val matchesDate = when {
                 startDate != null && endDate != null -> {
                     val start = trimTime(startDate!!)
                     val end = trimTime(endDate!!)
 
-                    // Ensure the expense dates are within the selected range
+                    //ensure the expense start and end dates are within the selected range
                     (expenseStartCal != null && !expenseStartCal.before(start) && !expenseStartCal.after(end)) ||
                             (expenseEndCal != null && !expenseEndCal.before(start) && !expenseEndCal.after(end))
                 }
@@ -180,7 +190,7 @@ class ManageExpensesActivity : BaseActivity() {
                     (expenseStartCal != null && !expenseStartCal.after(end)) ||
                             (expenseEndCal != null && !expenseEndCal.after(end))
                 }
-                else -> true // No date filters applied
+                else -> true //no date filters applied
             }
 
             matchesSearch && matchesAmount && matchesDate
@@ -189,11 +199,11 @@ class ManageExpensesActivity : BaseActivity() {
         adapter.submitList(filteredList)
     }
 
-
     private fun parseDate(dateStr: String?): Calendar? {
         return try {
             if (dateStr.isNullOrBlank()) return null
-            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())  // Update to dd/MM/yyyy
+            //note must always be 'yyyy' not 'YYYY'
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) //corrected date format
             val date = dateFormat.parse(dateStr)
             Calendar.getInstance().apply {
                 time = date!!
@@ -206,10 +216,6 @@ class ManageExpensesActivity : BaseActivity() {
             null
         }
     }
-
-
-
-
     private fun trimTime(calendar: Calendar): Calendar {
         return Calendar.getInstance().apply {
             timeInMillis = calendar.timeInMillis

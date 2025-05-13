@@ -26,6 +26,17 @@
                 android:textColor="@android:color/white"
                 android:layout_marginBottom="16dp" />
 
+            <EditText
+                android:id="@+id/edtSalary"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:hint="Enter Salary"
+                android:inputType="numberDecimal"
+                android:textColor="@android:color/white"
+                android:textColorHint="#BDBDBD"
+                android:backgroundTint="#BB86FC"
+                android:layout_marginBottom="12dp" />
+
             <!--field to enter minimum budget-->
             <EditText
                 android:id="@+id/edtMinBudget"

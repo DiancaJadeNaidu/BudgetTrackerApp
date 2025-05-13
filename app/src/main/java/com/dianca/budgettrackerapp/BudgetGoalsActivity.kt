@@ -14,6 +14,7 @@ import java.util.*
 class BudgetGoalsActivity : BaseActivity() {
 
     //UI elements
+    private lateinit var edtSalary: EditText
     private lateinit var edtMinBudget: EditText
     private lateinit var edtMaxBudget: EditText
     private lateinit var seekBarMinBudget: SeekBar
@@ -34,6 +35,7 @@ class BudgetGoalsActivity : BaseActivity() {
         setupBottomNav()
 
         //link views with layout
+        edtSalary = findViewById(R.id.edtSalary)
         edtMinBudget = findViewById(R.id.edtMinBudget)
         edtMaxBudget = findViewById(R.id.edtMaxBudget)
         seekBarMinBudget = findViewById(R.id.seekBarMinBudget)
@@ -103,73 +105,70 @@ class BudgetGoalsActivity : BaseActivity() {
 
         //save budget goals when button is clicked
         btnSaveBudget.setOnClickListener {
+            val salary = edtSalary.text.toString().toDoubleOrNull()
             val minBudget = edtMinBudget.text.toString().toDoubleOrNull()
             val maxBudget = edtMaxBudget.text.toString().toDoubleOrNull()
 
-            if (minBudget != null && maxBudget != null) {
-                if (minBudget <= maxBudget) {
-                    val goal = BudgetGoalEntity(
-                        categoryId = 1,
-                        minGoalAmount = minBudget,
-                        maxGoalAmount = maxBudget,
-                        month = currentMonth
-                    )
+            if (salary == null || minBudget == null || maxBudget == null) {
+                Toast.makeText(this, "Please enter valid salary and budget amounts.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-                    //save goal to database
-                    lifecycleScope.launch {
-                        try {
-                            db.budgetGoalDAO().insert(goal)
-                            Toast.makeText(
-                                this@BudgetGoalsActivity,
-                                "Budget goals saved!",
-                                Toast.LENGTH_SHORT
-                            ).show()
+            if (maxBudget > salary) {
+                Toast.makeText(this, "Error: Max budget cannot exceed salary (R$salary)", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
-                            // Fetch and display saved budget goals
-                            val savedGoals = db.budgetGoalDAO().getGoalsForMonth(currentMonth)
-                            if (savedGoals.isNotEmpty()) {
-                                val savedGoal =
-                                    savedGoals[0] //assuming there is only one goal for the month
-                                val displayText =
-                                    "Min Budget for ${currentMonth}: R${savedGoal.minGoalAmount}\n" +
-                                            "Max Budget for ${currentMonth}: R${savedGoal.maxGoalAmount}"
+            if (minBudget <= maxBudget) {
+                val goal = BudgetGoalEntity(
+                    categoryId = 1,
+                    minGoalAmount = minBudget,
+                    maxGoalAmount = maxBudget,
+                    month = currentMonth
+                )
 
-                                //update the TextView to show saved goals
-                                val txtDisplayGoals: TextView = findViewById(R.id.txtDisplayGoals)
-                                txtDisplayGoals.text = displayText
-                            }
+                //save goal to database
+                lifecycleScope.launch {
+                    try {
+                        db.budgetGoalDAO().insert(goal)
+                        Toast.makeText(
+                            this@BudgetGoalsActivity,
+                            "Budget goals saved successfully!",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-                            //reset the UI after displaying the saved goals
-                            edtMinBudget.setText("")
-                            edtMaxBudget.setText("")
-                            seekBarMinBudget.progress = 0
-                            seekBarMaxBudget.progress = 0
-                            txtMinSeek.text = "Min Budget: R0"
-                            txtMaxSeek.text = "Max Budget: R0"
+                        // Fetch and display saved budget goals
+                        val savedGoals = db.budgetGoalDAO().getGoalsForMonth(currentMonth)
+                        if (savedGoals.isNotEmpty()) {
+                            val savedGoal = savedGoals[0]
+                            val displayText = "Min Budget for ${currentMonth}: R${savedGoal.minGoalAmount}\n" +
+                                    "Max Budget for ${currentMonth}: R${savedGoal.maxGoalAmount}"
 
-                        } catch (e: Exception) {
-                            Toast.makeText(
-                                this@BudgetGoalsActivity,
-                                "Error: ${e.message}",
-                                Toast.LENGTH_LONG
-                            ).show()
+                            val txtDisplayGoals: TextView = findViewById(R.id.txtDisplayGoals)
+                            txtDisplayGoals.text = displayText
                         }
+
+                        //reset UI
+                        edtMinBudget.setText("")
+                        edtMaxBudget.setText("")
+                        edtSalary.setText("")
+                        seekBarMinBudget.progress = 0
+                        seekBarMaxBudget.progress = 0
+                        txtMinSeek.text = "Min Budget: R0"
+                        txtMaxSeek.text = "Max Budget: R0"
+
+                    } catch (e: Exception) {
+                        Toast.makeText(this@BudgetGoalsActivity, "Failed to save budget goals.", Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(
-                        this,
-                        "Minimum budget cannot be greater than maximum budget.",
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
             } else {
-                Toast.makeText(this, "Please enter valid numbers.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Min budget must be less than or equal to max budget.", Toast.LENGTH_SHORT).show()
             }
         }
     }
-        //returns formatted current month
+
     private fun getCurrentMonthFormatted(): String {
-        val dateFormat = SimpleDateFormat("MMMM yyyy", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("MMMM", Locale.getDefault())
         return dateFormat.format(Date())
     }
 }
