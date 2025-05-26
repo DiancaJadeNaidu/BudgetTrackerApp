@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.dianca.budgettrackerapp.databinding.FragmentHomeBinding
+import kotlin.jvm.java
 
 //HomeFragment to display user welcome and navigate to different activities
 class HomeFragment : Fragment() {
@@ -72,10 +74,24 @@ class HomeFragment : Fragment() {
             //startActivity(Intent(activity, GraphActivity::class.java))
             Toast.makeText(requireContext(), "Feature coming soon", Toast.LENGTH_SHORT).show()
         }
+
+        binding.imgMiniGames.setOnClickListener {
+            //startActivity(Intent(activity, GraphActivity::class.java))
+            startActivity(Intent(activity, MiniGamesActivity::class.java))
+        }
+
+
         return binding.root
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    //clean up the binding when the view is destroyed
+        binding.openChatButton.setOnClickListener {
+            val intent = Intent(requireActivity(), ChatActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

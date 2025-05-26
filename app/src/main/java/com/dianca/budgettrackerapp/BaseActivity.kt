@@ -32,6 +32,7 @@ abstract class BaseActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     true
                 }
+
                 else -> false
             }
         }

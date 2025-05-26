@@ -4,5 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="sunset_color">#FEB47B</color>
     <color name="red_color">#F44336</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorAccent">#FF4081</color>
 
 </resources>
