@@ -60,8 +60,6 @@ class ManageExpensesActivity : BaseActivity() {
         }
 
         setupRecyclerView()
-        setupSearchFilter()
-        setupAmountFilter()
         setupDatePickers()
 
 
@@ -81,7 +79,7 @@ class ManageExpensesActivity : BaseActivity() {
                 startDate = Calendar.getInstance().apply {
                     set(selectedYear, selectedMonth, selectedDay)
                 }
-                filterExpenses(binding.editTextSearch.text.toString(), binding.seekBarAmount.progress)
+
             },
             year, month, day
         )
@@ -94,7 +92,7 @@ class ManageExpensesActivity : BaseActivity() {
                 endDate = Calendar.getInstance().apply {
                     set(selectedYear, selectedMonth, selectedDay)
                 }
-                filterExpenses(binding.editTextSearch.text.toString(), binding.seekBarAmount.progress)
+
             },
             year, month, day
         )
@@ -139,27 +137,9 @@ class ManageExpensesActivity : BaseActivity() {
         }
     }
 
-    private fun setupSearchFilter() {
-        binding.editTextSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                filterExpenses(s.toString(), binding.seekBarAmount.progress)
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
-    }
 
-    private fun setupAmountFilter() {
-        binding.seekBarAmount.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                binding.txtSeekBarValue.text = "Max Amount: R$progress"
-                filterExpenses(binding.editTextSearch.text.toString(), progress)
-            }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
-    }
+
 
     private fun filterExpenses(searchText: String, maxAmount: Int) {
         val filteredList = allExpenses.filter { expense ->

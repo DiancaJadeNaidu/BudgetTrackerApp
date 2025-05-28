@@ -42,11 +42,13 @@
         android:drawableStart="@android:drawable/ic_dialog_email"
         android:drawablePadding="8dp"
         android:hint="Enter email"
+        android:textStyle="bold"
         android:inputType="textEmailAddress"
         android:paddingStart="16dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#B3FFFFFF"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        />
 
     <!--password requirements listed-->
     <TextView
@@ -54,11 +56,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Password must:\n• Be at least 8 characters long\n• Include an uppercase letter\n• Include a lowercase letter\n• Include a number\n• Include a special character"
-        android:textSize="12sp"
+        android:textSize="20sp"
         android:textColor="#B3FFFFFF"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/registerPasswordEditText"
@@ -66,6 +69,7 @@
         android:layout_height="60dp"
         android:hint="Enter password"
         android:inputType="textPassword"
+        android:textStyle="bold"
         android:textColor="#FFFFFF"
         android:textColorHint="#B3FFFFFF"
         android:layout_marginBottom="8dp"
@@ -83,6 +87,7 @@
         android:layout_height="60dp"
         android:hint="Confirm password"
         android:inputType="textPassword"
+        android:textStyle="bold"
         android:textColor="#FFFFFF"
         android:textColorHint="#B3FFFFFF"
         android:layout_marginBottom="32dp"

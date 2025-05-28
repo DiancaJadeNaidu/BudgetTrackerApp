@@ -37,28 +37,6 @@
                     android:inputType="text"
                     android:textColor="@color/white" />
 
-                <!--filter by maximum amount using seekbar-->
-                <TextView
-                    android:id="@+id/txtMaxAmountLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Filter by max amount: R"
-                    android:textColor="@color/white" />
-
-                <SeekBar
-                    android:id="@+id/seekBarAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="10000" />
-
-                <TextView
-                    android:id="@+id/txtSeekBarValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Max Amount: R1000"
-                    android:layout_marginTop="4dp"
-                    android:textColor="@color/white" />
             </LinearLayout>
 
             <!--date pickers -->
