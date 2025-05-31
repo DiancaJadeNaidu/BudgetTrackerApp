@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dianca.budgettrackerapp.R
 import kotlin.random.Random
 
-class TapGameActivity : AppCompatActivity() {
+class TapGameActivity : BaseActivity() {
 
     private lateinit var gameLayout: FrameLayout
     private lateinit var tapTarget: ImageView
@@ -38,6 +38,9 @@ class TapGameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tap_game)
+
+        //set up bottom navigation
+        setupBottomNav()
 
         gameLayout = findViewById(R.id.tapGameLayout)
         tapTarget = findViewById(R.id.tapTarget)

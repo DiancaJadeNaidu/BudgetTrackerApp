@@ -10,13 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dianca.budgettrackerapp.R
 import kotlin.random.Random
 
-class MemoryGameActivity : AppCompatActivity() {
+class MemoryGameActivity : BaseActivity() {
 
     private lateinit var gridLayout: GridLayout
     private val cardImages = listOf(
-        R.drawable.ic_coin, R.drawable.ic_wallet, R.drawable.ic_piggy_bank,
+        R.drawable.dollar, R.drawable.ic_wallet, R.drawable.ic_piggy_bank,
         R.drawable.ic_chart, R.drawable.ic_bank, R.drawable.ic_credit_card
     )
+
     private val cards = mutableListOf<Int>()
     private val cardViews = mutableListOf<ImageView>()
     private var firstCardIndex: Int? = null
@@ -27,11 +28,13 @@ class MemoryGameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_memory_game)
-
+//set up bottom navigation
+        setupBottomNav()
         gridLayout = findViewById(R.id.gridLayout)
 
         prepareCards()
         setupGrid()
+
     }
 
     private fun prepareCards() {
@@ -42,17 +45,29 @@ class MemoryGameActivity : AppCompatActivity() {
     }
 
     private fun setupGrid() {
+        val cardSizeDp = 100
+        val scale = resources.displayMetrics.density
+        val cardSizePx = (cardSizeDp * scale).toInt()
+
         gridLayout.columnCount = 3
         gridLayout.rowCount = 4
         cardViews.clear()
         gridLayout.removeAllViews()
 
-        for (i in 0 until cards.size) {
-            val imageView = ImageView(this)
-            imageView.setImageResource(R.drawable.card_back)
-            imageView.setPadding(8, 8, 8, 8)
-            imageView.adjustViewBounds = true
-            imageView.setOnClickListener { onCardClicked(i) }
+        for (i in cards.indices) {
+            val imageView = ImageView(this).apply {
+                layoutParams = GridLayout.LayoutParams().apply {
+                    width = cardSizePx
+                    height = cardSizePx
+                    setMargins(8, 8, 8, 8)
+                }
+                setImageResource(R.drawable.card_back)
+                adjustViewBounds = true
+                scaleType = ImageView.ScaleType.CENTER_CROP
+                setPadding(4, 4, 4, 4)
+                setOnClickListener { onCardClicked(i) }
+            }
+
             cardViews.add(imageView)
             gridLayout.addView(imageView)
         }

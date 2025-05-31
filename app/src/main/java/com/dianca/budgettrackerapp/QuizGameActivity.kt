@@ -8,7 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.dianca.budgettrackerapp.R
 
-class QuizGameActivity : AppCompatActivity() {
+class QuizGameActivity : BaseActivity() {
 
     private lateinit var tvQuestion: TextView
     private lateinit var btnOption1: Button
@@ -30,6 +30,9 @@ class QuizGameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_game)
+
+        //set up bottom navigation
+        setupBottomNav()
 
         // ✅ Initialize views using findViewById
         tvQuestion = findViewById(R.id.tvQuestion)

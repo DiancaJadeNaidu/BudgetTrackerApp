@@ -1,63 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:background="@drawable/backgroundimg">
+    android:background="@drawable/backgroundimg"
+    android:padding="24dp">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <!-- Scrollable quiz content -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNav">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingBottom="32dp">
+
+            <TextView
+                android:id="@+id/tvQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Question goes here"
+                android:textSize="22sp"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="32dp" />
+
+            <Button
+                android:id="@+id/btnOption1"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option 1"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp" />
+
+            <Button
+                android:id="@+id/btnOption2"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option 2"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp" />
+
+            <Button
+                android:id="@+id/btnOption3"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option 3"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp" />
+
+            <Button
+                android:id="@+id/btnOption4"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Option 4"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Fixed Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:paddingBottom="32dp">
-
-        <TextView
-            android:id="@+id/tvQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Question goes here"
-            android:textSize="22sp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="32dp" />
-
-        <Button
-            android:id="@+id/btnOption1"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Option 1"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="16dp" />
-
-        <Button
-            android:id="@+id/btnOption2"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Option 2"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="16dp" />
-
-        <Button
-            android:id="@+id/btnOption3"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Option 3"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="16dp" />
-
-        <Button
-            android:id="@+id/btnOption4"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Option 4"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="16dp" />
-
-    </LinearLayout>
-</ScrollView>
+        android:layout_alignParentBottom="true"
+        android:background="@color/black"
+        app:itemIconTint="@android:color/holo_blue_bright"
+        app:itemTextColor="@android:color/holo_blue_bright"
+        app:menu="@menu/bottom_nav_menu" />
+</RelativeLayout>

@@ -43,7 +43,7 @@ class SettingsFragment : Fragment() {
 
         //show toast message for rewards (feature placeholder)
         rewardsBtn.setOnClickListener {
-            Toast.makeText(context, "🏆 Viewing rewards...", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(requireContext(), RewardActivity::class.java))
         }
 
         //handle logout: show message and redirect to 'LoginActivity'

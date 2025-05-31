@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dianca.budgettrackerapp.R
 import kotlin.random.Random
 
-class SpinGameActivity : AppCompatActivity() {
+class SpinGameActivity : BaseActivity() {
 
     private lateinit var spinButton: Button
     private lateinit var wheelImage: ImageView
@@ -34,6 +34,9 @@ class SpinGameActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spin_game)
+
+        //set up bottom navigation
+        setupBottomNav()
 
         spinButton = findViewById(R.id.spinButton)
         wheelImage = findViewById(R.id.wheelImage)

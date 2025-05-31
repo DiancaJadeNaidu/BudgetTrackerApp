@@ -7,11 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.dianca.budgettrackerapp.R
 
-class MiniGamesActivity : AppCompatActivity() {
+class MiniGamesActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mini_games)
+
+        //set up bottom navigation
+        setupBottomNav()
 
         findViewById<CardView>(R.id.cardQuiz).setOnClickListener {
             startActivity(Intent(this, QuizGameActivity::class.java))

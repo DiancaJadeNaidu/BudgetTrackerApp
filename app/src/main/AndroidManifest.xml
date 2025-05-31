@@ -67,5 +67,11 @@
         <activity android:name=".TapGameActivity" android:exported="true" />
 
         <activity android:name=".SpinGameActivity" android:exported="true" />
+
+        <activity android:name=".RewardActivity" android:exported="true" />
+
+        <activity android:name=".PayfastCheckoutActivity" android:exported="true" />
+
+
     </application>
 </manifest>
