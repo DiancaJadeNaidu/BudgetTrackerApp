@@ -1,59 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundimg"
-    android:padding="24dp">
+    android:background="@drawable/backgroundimg">
 
-    <!-- Main Content -->
-    <LinearLayout
-        android:id="@+id/contentLayout"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottomNav">
+    <!-- Scrollable Content Area -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:id="@+id/wheelImage"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:src="@drawable/wheel"
-            android:contentDescription="Spin Wheel"
-            android:layout_marginBottom="24dp" />
-
-        <Button
-            android:id="@+id/spinButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Spin the Wheel 🎡"
-            android:textSize="18sp"
-            android:padding="12dp"
-            android:backgroundTint="#FFA726"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="24dp" />
-
-        <TextView
-            android:id="@+id/adviceText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🎯 Financial wisdom awaits!"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:padding="16dp"
-            android:background="#80000000" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
 
-    <!-- Bottom Navigation View -->
+            <ImageView
+                android:id="@+id/wheelImage"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:src="@drawable/wheel"
+                android:contentDescription="Spin Wheel"
+                android:layout_marginBottom="24dp" />
+
+            <Button
+                android:id="@+id/spinButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spin the Wheel 🎡"
+                android:textSize="18sp"
+                android:padding="12dp"
+                android:backgroundTint="#FFA726"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="24dp" />
+
+            <TextView
+                android:id="@+id/adviceText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🎯 Financial wisdom awaits!"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:padding="16dp"
+                android:background="#80000000" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation View that spans the full width -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:background="@color/black"
+        app:menu="@menu/bottom_nav_menu"
         app:itemIconTint="@android:color/holo_blue_bright"
         app:itemTextColor="@android:color/holo_blue_bright"
-        app:menu="@menu/bottom_nav_menu" />
-</RelativeLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

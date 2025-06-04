@@ -39,10 +39,7 @@ class HomeFragment : Fragment() {
             binding.tvWelcome.text = "Welcome, ${username.capitalize()}!"
         }
 
-        //navigate to settings
-        binding.imgProfile.setOnClickListener {
-            startActivity(Intent(activity, SettingsActivity::class.java))
-        }
+
 
         //navigate to add category activity
         binding.imgCategories.setOnClickListener {

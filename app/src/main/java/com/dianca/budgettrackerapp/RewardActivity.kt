@@ -35,10 +35,12 @@ class RewardActivity : BaseActivity() {
         binding.checkoutButton.setOnClickListener {
             val balance = DailyRewardManager.getBalance(this)
             if (balance > 0) {
+                DailyRewardManager.resetBalance(this) // Reset after checkout
                 startActivity(Intent(this, PayfastCheckoutActivity::class.java))
             } else {
                 Toast.makeText(this, "❌ No rewards to checkout. Please claim first.", Toast.LENGTH_SHORT).show()
             }
+            updateRewardMessage()
         }
 
         binding.backButton.setOnClickListener {

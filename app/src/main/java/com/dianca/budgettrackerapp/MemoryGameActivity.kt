@@ -14,7 +14,7 @@ class MemoryGameActivity : BaseActivity() {
 
     private lateinit var gridLayout: GridLayout
     private val cardImages = listOf(
-        R.drawable.dollar, R.drawable.ic_wallet, R.drawable.ic_piggy_bank,
+        R.drawable.ic_cash, R.drawable.ic_wallet, R.drawable.ic_piggy_bank,
         R.drawable.ic_chart, R.drawable.ic_bank, R.drawable.ic_credit_card
     )
 
