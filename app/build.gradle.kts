@@ -72,6 +72,8 @@ dependencies {
 //fragment
     implementation ("androidx.fragment:fragment-ktx:1.6.2")
 
+// MPAndroidChart
+    implementation("com.github.PhilJay:MPAndroidChart:3.1.0")
 
     implementation ("com.google.android.material:material:1.9.0")
     implementation ("com.github.bumptech.glide:glide:4.15.1")

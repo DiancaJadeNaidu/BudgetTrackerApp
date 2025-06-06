@@ -68,8 +68,8 @@ class HomeFragment : Fragment() {
 
         //placeholder for navigating to graph activity
         binding.imgGraph.setOnClickListener {
-            //startActivity(Intent(activity, GraphActivity::class.java))
-            Toast.makeText(requireContext(), "Feature coming soon", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(activity, DashboardActivity::class.java))
+
         }
 
         binding.imgMiniGames.setOnClickListener {

@@ -75,6 +75,12 @@
 
         <activity android:name=".PayfastCheckoutActivity" android:exported="true" />
 
+        <activity android:name=".DashboardActivity" android:exported="true" />
+
+        <activity android:name=".PieChartActivity" android:exported="true" />
+
+        <activity android:name=".BudgetProgressActivity" android:exported="true" />
+
 
     </application>
 </manifest>
