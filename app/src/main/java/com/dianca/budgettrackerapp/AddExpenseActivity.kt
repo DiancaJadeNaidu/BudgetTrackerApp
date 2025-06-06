@@ -15,6 +15,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.util.*
+import android.graphics.Bitmap
+import android.provider.MediaStore
+import android.util.Base64
+import java.io.ByteArrayOutputStream
+
 
 class AddExpenseActivity : BaseActivity() {
 
@@ -97,6 +102,15 @@ class AddExpenseActivity : BaseActivity() {
             val endDate = binding.edtEndDate.text.toString()
             val timePeriod = binding.spinnerTimePeriod.selectedItem.toString()
 
+            val imageBase64 = selectedImageUri?.let {
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, it)
+                val outputStream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                val byteArray = outputStream.toByteArray()
+                Base64.encodeToString(byteArray, Base64.DEFAULT)
+            }
+
+
             if (name.isEmpty() || amount == null || startDate.isEmpty() || endDate.isEmpty() || description.isEmpty()) {
                 Toast.makeText(this, "Please complete all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -114,7 +128,7 @@ class AddExpenseActivity : BaseActivity() {
                     startDate = startDate,
                     endDate = endDate,
                     timePeriod = timePeriod,
-                    imagePath = selectedImageUri?.toString()
+                    imagePath = imageBase64
                 )
                 docRef.set(expense).await()
                 Toast.makeText(this@AddExpenseActivity, "Expense saved!", Toast.LENGTH_SHORT).show()
