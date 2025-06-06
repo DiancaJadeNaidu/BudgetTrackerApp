@@ -73,7 +73,6 @@ class HomeFragment : Fragment() {
         }
 
         binding.imgMiniGames.setOnClickListener {
-            //startActivity(Intent(activity, GraphActivity::class.java))
             startActivity(Intent(activity, MiniGamesActivity::class.java))
         }
 

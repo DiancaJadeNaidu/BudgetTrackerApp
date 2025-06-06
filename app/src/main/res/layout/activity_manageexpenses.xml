@@ -37,6 +37,7 @@
                     android:inputType="text"
                     android:textColor="@color/white" />
 
+
             </LinearLayout>
 
             <!--date pickers -->

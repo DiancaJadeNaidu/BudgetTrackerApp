@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -47,19 +49,29 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.firebase.auth.ktx)
+    //implementation(libs.firebase.auth.ktx)
     implementation(libs.filament.android)
     implementation(libs.google.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     //adding roomdb
-    implementation("androidx.room:room-runtime:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
-    implementation("androidx.room:room-ktx:2.6.1")
+//    implementation("androidx.room:room-runtime:2.6.1")
+//    kapt("androidx.room:room-compiler:2.6.1")
+//    implementation("androidx.room:room-ktx:2.6.1")
 
     // Firebase database
-    implementation("com.google.firebase:firebase-database-ktx:20.3.1")
+    // Use platform() with the BOM version
+    implementation(platform("com.google.firebase:firebase-bom:32.7.3"))
+
+// Add features without versions
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-storage-ktx")
+
+//fragment
+    implementation ("androidx.fragment:fragment-ktx:1.6.2")
+
 
     implementation ("com.google.android.material:material:1.9.0")
     implementation ("com.github.bumptech.glide:glide:4.15.1")

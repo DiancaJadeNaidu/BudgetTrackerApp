@@ -1,23 +1,33 @@
-package com.dianca.budgettrackerapp
+package com.dianca.budgettrackerapp.data
 
-import androidx.room.Dao
-import androidx.room.Query
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
 
-@Dao
-interface ExpenseSummaryDAO {
-
-    //query to get the total amount spent in a category within a specific time range
-    @Query("""
-        SELECT SUM(amount) FROM expenses 
-        WHERE categoryId = :categoryId 
-        AND timestamp BETWEEN :startTime AND :endTime
-    """)
+class ExpenseSummaryDAO(
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+) {
     suspend fun getTotalByCategoryWithinPeriod(
-        //the category of expenses
-        categoryId: Int,
-        //start timestamp for the period
+        categoryId: String,
         startTime: Long,
-        //end timestamp for the period
         endTime: Long
-    ): Double
+    ): Double {
+        return try {
+            val snapshot = db.collection("expenses")
+                .whereEqualTo("categoryId", categoryId)
+                .whereGreaterThanOrEqualTo("timestamp", startTime)
+                .whereLessThanOrEqualTo("timestamp", endTime)
+                .get()
+                .await()
+
+            val total = snapshot.documents.sumOf {
+                val amount = it.getDouble("amount") ?: 0.0
+                amount
+            }
+
+            total
+        } catch (e: Exception) {
+            e.printStackTrace()
+            0.0
+        }
+    }
 }

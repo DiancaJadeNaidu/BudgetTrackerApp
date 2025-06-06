@@ -12,6 +12,7 @@
 
     <!--application settings include backup rules, icons, labels, RTL support, and theme-->
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -37,14 +38,14 @@
         <activity android:name=".RegisterActivity" android:exported="true" />
         <!--add expense screen-->
         <activity android:name=".AddExpenseActivity" android:exported="true" />
-        <!--budget goals screen-->
+
         <activity android:name=".BudgetGoalsActivity" android:exported="true" />
         <!--report screen-->
         <activity android:name=".ReportActivity" android:exported="true" />
         <!--notifications screen(not exported)-->
         <activity android:name=".NotificationsActivity" />
         <!--manage expenses screen(not exported)-->
-        <activity android:name=".ManageExpensesActivity" />
+      <activity android:name=".ManageExpensesActivity" />
         <!--settings screen-->
         <activity android:name=".SettingsActivity" android:exported="true" />
         <!--user profile screen-->

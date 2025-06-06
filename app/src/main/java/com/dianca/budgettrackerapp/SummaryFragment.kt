@@ -7,77 +7,107 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.dianca.budgettrackerapp.databinding.FragmentSummaryBinding
+import com.dianca.budgettrackerapp.viewmodel.SummaryViewModel
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
-import java.util.Locale
+import java.util.*
 
 class SummaryFragment : Fragment() {
 
-    private lateinit var binding: FragmentSummaryBinding
-    private lateinit var viewModel: SummaryViewModel
+    private var _binding: FragmentSummaryBinding? = null
+    private val binding get() = _binding!!
 
-    private var startDate: Long? = null
-    private var endDate: Long? = null
+    //viewModel instance scoped to this fragment
+    private val viewModel: SummaryViewModel by viewModels()
+    private var startDate: Calendar? = null
+    private var endDate: Calendar? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = FragmentSummaryBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this)[SummaryViewModel::class.java]
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSummaryBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        //set up start date button
-        binding.startDateBtn.setOnClickListener {
-            showDatePicker { millis ->
-                startDate = millis
-                //show selected start date
-                binding.startDateText.text = formatDate(millis)
-            }
-        }
-        //set up end date button
-        binding.endDateBtn.setOnClickListener {
-            showDatePicker { millis ->
-                endDate = millis
-                //show selected end date
-                binding.endDateText.text = formatDate(millis)
-            }
-        }
+    //called after the view has been created
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        //load summary button click
+        setupDatePickers()
+
+        //load summary when button is clicked
         binding.loadSummaryBtn.setOnClickListener {
             if (startDate != null && endDate != null) {
-                lifecycleScope.launch {
-                    //get summary results
-                    val results = viewModel.getTotalsByCategory(startDate!!, endDate!!)
-                    val currencyFormat = NumberFormat.getCurrencyInstance(Locale("en", "ZA"))
-                    val summaryText = results.joinToString("\n") { "${it.first}: ${currencyFormat.format(it.second)}" }
-                    //display results
-                    binding.resultsText.text = summaryText
-                }
+                loadSummary()
             } else {
                 //show error if dates are not selected
                 Toast.makeText(requireContext(), "Please select both dates", Toast.LENGTH_SHORT).show()
             }
         }
-
-        return binding.root
     }
 
-    //show date picker and call onDateSelected when a date is chosen
-    private fun showDatePicker(onDateSelected: (Long) -> Unit) {
+    //set up date pickers for start and end dates
+    private fun setupDatePickers() {
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val calendar = Calendar.getInstance()
-        DatePickerDialog(requireContext(), { _, year, month, day ->
-            calendar.set(year, month, day, 0, 0, 0)
-            onDateSelected(calendar.timeInMillis)
-        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
+
+        //set up start date button
+        binding.startDateBtn.setOnClickListener {
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            DatePickerDialog(requireContext(), { _, y, m, d ->
+                startDate = Calendar.getInstance().apply { set(y, m, d, 0, 0, 0) }
+                binding.startDateBtn.text = sdf.format(startDate!!.time)
+            }, year, month, day).show()
+        }
+
+        //set up end date button
+        binding.endDateBtn.setOnClickListener {
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            DatePickerDialog(requireContext(), { _, y, m, d ->
+                endDate = Calendar.getInstance().apply { set(y, m, d, 23, 59, 59) }
+                binding.endDateBtn.text = sdf.format(endDate!!.time)
+            }, year, month, day).show()
+        }
     }
 
-    //format the selected date to "yyyy-MM-dd"
-    private fun formatDate(millis: Long): String {
-        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        return format.format(Date(millis))
+    //load and display summary based on selected date range
+    private fun loadSummary() {
+        val start = startDate ?: return
+        val end = endDate ?: return
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+
+                //get summary results from ViewModel
+                val results = viewModel.getTotalsByCategory(start, end)
+                val currencyFormat = NumberFormat.getCurrencyInstance(Locale("en", "ZA"))
+
+                val summaryText = results.joinToString("\n") {
+                    "${it.first}: ${currencyFormat.format(it.second)}"
+                }
+
+                //display results
+                binding.resultsText.text = summaryText
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Failed to load summary", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    //clear binding
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

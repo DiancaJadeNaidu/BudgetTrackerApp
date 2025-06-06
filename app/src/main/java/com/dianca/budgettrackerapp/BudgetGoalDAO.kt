@@ -1,15 +1,32 @@
 package com.dianca.budgettrackerapp.data
 
-import androidx.room.*
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
+import kotlinx.coroutines.tasks.await
 
-//DAO for accessing budget goals in the database
-@Dao
-interface BudgetGoalDAO {
+class BudgetGoalDAO {
+
+    private val firestore = FirebaseFirestore.getInstance()
+    private val collection = firestore.collection("budget_goals")
+
     //insert or update a budget goal
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(goal: BudgetGoalEntity)
+    suspend fun insert(goal: BudgetGoalEntity) {
+        val docId = goal.id.ifEmpty { collection.document().id }
+        collection.document(docId)
+            .set(goal.copy(id = docId))
+            .await()
+    }
 
     //get all budget goals for a specific month
-    @Query("SELECT * FROM budget_goals WHERE month = :month")
-    suspend fun getGoalsForMonth(month: String): List<BudgetGoalEntity>
+    suspend fun getGoalsForMonth(month: String): List<BudgetGoalEntity> {
+        return try {
+            val snapshot: QuerySnapshot = collection
+                .whereEqualTo("month", month)
+                .get()
+                .await()
+            snapshot.toObjects(BudgetGoalEntity::class.java)
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
 }

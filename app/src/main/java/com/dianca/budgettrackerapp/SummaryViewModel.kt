@@ -1,36 +1,56 @@
-package com.dianca.budgettrackerapp
+package com.dianca.budgettrackerapp.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.room.Room
+import android.util.Log
+import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
+import java.util.*
 
-class SummaryViewModel(application: Application) : AndroidViewModel(application) {
+class SummaryViewModel : ViewModel() {
 
-    //initialize the database instance
-    private val db = Room.databaseBuilder(
-        application,
-        AppDatabase::class.java,
-        "budget_tracker_db"
-    ).build()
-
-    //get the DAOs for accessing data
-    private val categoryDao = db.categoryDao()
-    private val summaryDao = db.expenseSummaryDao()
+    //initialize firestore
+    private val db = FirebaseFirestore.getInstance()
 
     //fetch totals by category within a specific time range
-    suspend fun getTotalsByCategory(startTime: Long, endTime: Long): List<Pair<String, Double>> {
-        //list to hold the category totals
-        val result = mutableListOf<Pair<String, Double>>()
-        //get all categories from the database
-        val categories = categoryDao.getAll()
+    suspend fun getTotalsByCategory(startDate: Calendar, endDate: Calendar): List<Pair<String, Double>> {
+        return try {
+            //convert dates to milliseconds
+            val startMillis = startDate.timeInMillis
+            val endMillis = endDate.timeInMillis
 
-        //loop - calculate total for each category within the time period
-        for (category in categories) {
-            val totalNumber: Number? = summaryDao.getTotalByCategoryWithinPeriod(category.id, startTime, endTime)
-            val total = totalNumber?.toDouble() ?: 0.0
-            //add the category and its total to the result list
-            result.add(category.name to total)
+            //query expenses in date range
+            val expensesSnapshot = db.collection("expenses")
+                .whereGreaterThanOrEqualTo("timestamp", startMillis)
+                .whereLessThanOrEqualTo("timestamp", endMillis)
+                .get()
+                .await()
+
+            //store total amount for each category ID
+            val categoryTotals = mutableMapOf<String, Double>()
+
+            //loop - calculate total for each category within the time period
+            for (doc in expensesSnapshot.documents) {
+                val categoryId = doc.getString("categoryId") ?: continue
+                val amount = doc.getDouble("amount") ?: 0.0
+                categoryTotals[categoryId] = categoryTotals.getOrDefault(categoryId, 0.0) + amount
+            }
+
+            //get category names
+            val categoriesSnapshot = db.collection("categories").get().await()
+            val categoryMap = categoriesSnapshot.documents.associateBy(
+                { it.id },
+                { it.getString("name") ?: "Uncategorized" }
+            )
+
+            //match category names with totals and sort by amount
+            return categoryTotals.map { (catId, total) ->
+                val catName = categoryMap[catId] ?: "Uncategorized"
+                Pair(catName, total)
+            }.sortedByDescending { it.second }
+
+        } catch (e: Exception) {
+            Log.e("SummaryViewModel", "Error fetching summary: ${e.message}", e)
+            emptyList()
         }
-        return result
     }
 }

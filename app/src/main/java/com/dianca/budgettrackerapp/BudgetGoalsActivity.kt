@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.dianca.budgettrackerapp.data.BudgetGoalDAO
 import com.dianca.budgettrackerapp.data.BudgetGoalEntity
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -13,7 +13,7 @@ import java.util.*
 
 class BudgetGoalsActivity : BaseActivity() {
 
-    //UI elements
+    // ─── View refs ──────────────────────────────────────────────────────────────
     private lateinit var edtSalary: EditText
     private lateinit var edtMinBudget: EditText
     private lateinit var edtMaxBudget: EditText
@@ -22,29 +22,41 @@ class BudgetGoalsActivity : BaseActivity() {
     private lateinit var txtMinSeek: TextView
     private lateinit var txtMaxSeek: TextView
     private lateinit var btnSaveBudget: Button
+    private lateinit var txtDisplayGoals: TextView
 
-    //database instance
-    private val db by lazy { AppDatabase.getInstance(this) }
-    private val maxSeekLimit = 1000
+    // ─── Data / helpers ─────────────────────────────────────────────────────────
+    private val maxSeekLimit = 1_000
+    private val goalDAO = BudgetGoalDAO()
+    private val currentMonth by lazy { getCurrentMonthFormatted() }
 
+    // ─── Lifecycle ─────────────────────────────────────────────────────────────
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_budget_goals)
 
-        //setup bottom navigation bar
         setupBottomNav()
+        bindViews()
+        initSeekBarsAndInputs()
+        initListeners()
 
-        //link views with layout
-        edtSalary = findViewById(R.id.edtSalary)
-        edtMinBudget = findViewById(R.id.edtMinBudget)
-        edtMaxBudget = findViewById(R.id.edtMaxBudget)
+        // 👉 show any saved goals as soon as we open the screen
+        loadGoalsForMonth(currentMonth)
+    }
+
+    // ─── UI initialisation helpers ─────────────────────────────────────────────
+    private fun bindViews() {
+        edtSalary        = findViewById(R.id.edtSalary)
+        edtMinBudget     = findViewById(R.id.edtMinBudget)
+        edtMaxBudget     = findViewById(R.id.edtMaxBudget)
         seekBarMinBudget = findViewById(R.id.seekBarMinBudget)
         seekBarMaxBudget = findViewById(R.id.seekBarMaxBudget)
-        txtMinSeek = findViewById(R.id.txtMinSeekValue)
-        txtMaxSeek = findViewById(R.id.txtMaxSeekValue)
-        btnSaveBudget = findViewById(R.id.btnSaveBudget)
+        txtMinSeek       = findViewById(R.id.txtMinSeekValue)
+        txtMaxSeek       = findViewById(R.id.txtMaxSeekValue)
+        txtDisplayGoals  = findViewById(R.id.txtDisplayGoals)
+        btnSaveBudget    = findViewById(R.id.btnSaveBudget)
+    }
 
-        //set seekbar limits and default values
+    private fun initSeekBarsAndInputs() {
         seekBarMinBudget.max = maxSeekLimit
         seekBarMaxBudget.max = maxSeekLimit
 
@@ -54,121 +66,108 @@ class BudgetGoalsActivity : BaseActivity() {
         edtMaxBudget.setText("500")
         txtMinSeek.text = "Min Budget: R100"
         txtMaxSeek.text = "Max Budget: R500"
+    }
 
-        //update EditText and label when seekbar changes
-        seekBarMinBudget.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                edtMinBudget.setText(progress.toString())
-                txtMinSeek.text = "Min Budget: R$progress"
-            }
+    private fun initListeners() {
+        // Seek-bar <--> EditText synchronisation
+        seekBarMinBudget.setOnSeekBarChangeListener(seekBarListener(edtMinBudget, txtMinSeek, "Min Budget"))
+        seekBarMaxBudget.setOnSeekBarChangeListener(seekBarListener(edtMaxBudget, txtMaxSeek, "Max Budget"))
+        addSeekSyncListener(edtMinBudget, seekBarMinBudget)
+        addSeekSyncListener(edtMaxBudget, seekBarMaxBudget)
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
+        // Save button
+        btnSaveBudget.setOnClickListener { saveGoals() }
+    }
 
-        seekBarMaxBudget.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                edtMaxBudget.setText(progress.toString())
-                txtMaxSeek.text = "Max Budget: R$progress"
-            }
+    // ─── Save logic ────────────────────────────────────────────────────────────
+    private fun saveGoals() {
+        val salary    = edtSalary.text.toString().toDoubleOrNull()
+        val minBudget = edtMinBudget.text.toString().toDoubleOrNull()
+        val maxBudget = edtMaxBudget.text.toString().toDoubleOrNull()
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
-        })
+        if (salary == null || minBudget == null || maxBudget == null) {
+            showToast("Please enter valid salary and budget amounts.")
+            return
+        }
+        if (maxBudget > salary) {
+            showToast("Error: Max budget cannot exceed salary (R$salary)")
+            return
+        }
+        if (minBudget > maxBudget) {
+            showToast("Min budget must be less than or equal to max budget.")
+            return
+        }
 
-        //update seekbar when EditText changes
-        edtMinBudget.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val value = s.toString().toIntOrNull()
-                value?.let {
-                    if (it in 0..maxSeekLimit) seekBarMinBudget.progress = it
-                }
-            }
+        val goal = BudgetGoalEntity(
+            id = UUID.randomUUID().toString(),   // always a fresh document
+            categoryId = "1",
+            minGoalAmount = minBudget,
+            maxGoalAmount = maxBudget,
+            month = currentMonth
+        )
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-
-        edtMaxBudget.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                val value = s.toString().toIntOrNull()
-                value?.let {
-                    if (it in 0..maxSeekLimit) seekBarMaxBudget.progress = it
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
-
-        val currentMonth = getCurrentMonthFormatted()
-
-        //save budget goals when button is clicked
-        btnSaveBudget.setOnClickListener {
-            val salary = edtSalary.text.toString().toDoubleOrNull()
-            val minBudget = edtMinBudget.text.toString().toDoubleOrNull()
-            val maxBudget = edtMaxBudget.text.toString().toDoubleOrNull()
-
-            if (salary == null || minBudget == null || maxBudget == null) {
-                Toast.makeText(this, "Please enter valid salary and budget amounts.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            if (maxBudget > salary) {
-                Toast.makeText(this, "Error: Max budget cannot exceed salary (R$salary)", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
-            if (minBudget <= maxBudget) {
-                val goal = BudgetGoalEntity(
-                    categoryId = 1,
-                    minGoalAmount = minBudget,
-                    maxGoalAmount = maxBudget,
-                    month = currentMonth
-                )
-
-                //save goal to database
-                lifecycleScope.launch {
-                    try {
-                        db.budgetGoalDAO().insert(goal)
-                        Toast.makeText(
-                            this@BudgetGoalsActivity,
-                            "Budget goals saved successfully!",
-                            Toast.LENGTH_SHORT
-                        ).show()
-
-                        // Fetch and display saved budget goals
-                        val savedGoals = db.budgetGoalDAO().getGoalsForMonth(currentMonth)
-                        if (savedGoals.isNotEmpty()) {
-                            val savedGoal = savedGoals[0]
-                            val displayText = "Min Budget for ${currentMonth}: R${savedGoal.minGoalAmount}\n" +
-                                    "Max Budget for ${currentMonth}: R${savedGoal.maxGoalAmount}"
-
-                            val txtDisplayGoals: TextView = findViewById(R.id.txtDisplayGoals)
-                            txtDisplayGoals.text = displayText
-                        }
-
-                        //reset UI
-                        edtMinBudget.setText("")
-                        edtMaxBudget.setText("")
-                        edtSalary.setText("")
-                        seekBarMinBudget.progress = 0
-                        seekBarMaxBudget.progress = 0
-                        txtMinSeek.text = "Min Budget: R0"
-                        txtMaxSeek.text = "Max Budget: R0"
-
-                    } catch (e: Exception) {
-                        Toast.makeText(this@BudgetGoalsActivity, "Failed to save budget goals.", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            } else {
-                Toast.makeText(this, "Min budget must be less than or equal to max budget.", Toast.LENGTH_SHORT).show()
+        lifecycleScope.launch {
+            try {
+                goalDAO.insert(goal)
+                showToast("Budget goals saved successfully!")
+                loadGoalsForMonth(currentMonth)   // refresh label
+                resetUI()
+            } catch (e: Exception) {
+                showToast("Failed to save to Firestore.")
             }
         }
     }
 
-    private fun getCurrentMonthFormatted(): String {
-        val dateFormat = SimpleDateFormat("MMMM", Locale.getDefault())
-        return dateFormat.format(Date())
+    // ─── Read & display goals ──────────────────────────────────────────────────
+    private fun loadGoalsForMonth(month: String) {
+        lifecycleScope.launch {
+            val goals = goalDAO.getGoalsForMonth(month)
+            val latestGoal = goals.lastOrNull()          // choose the newest record
+            if (latestGoal != null) {
+                txtDisplayGoals.text =
+                    "Min Budget for $month: R${latestGoal.minGoalAmount}\n" +
+                            "Max Budget for $month: R${latestGoal.maxGoalAmount}"
+            } else {
+                txtDisplayGoals.text = "No budget goals set for $month yet."
+            }
+        }
     }
+
+    // ─── Misc helpers ──────────────────────────────────────────────────────────
+    private fun resetUI() {
+        edtSalary.setText("")
+        edtMinBudget.setText("")
+        edtMaxBudget.setText("")
+        seekBarMinBudget.progress = 0
+        seekBarMaxBudget.progress = 0
+        txtMinSeek.text = "Min Budget: R0"
+        txtMaxSeek.text = "Max Budget: R0"
+    }
+
+    private fun seekBarListener(edit: EditText, label: TextView, prefix: String) =
+        object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(sb: SeekBar?, value: Int, fromUser: Boolean) {
+                edit.setText(value.toString())
+                label.text = "$prefix: R$value"
+            }
+            override fun onStartTrackingTouch(sb: SeekBar?) {}
+            override fun onStopTrackingTouch(sb: SeekBar?) {}
+        }
+
+    private fun addSeekSyncListener(edit: EditText, seek: SeekBar) {
+        edit.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                s?.toString()?.toIntOrNull()?.let {
+                    if (it in 0..maxSeekLimit) seek.progress = it
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
+
+    private fun getCurrentMonthFormatted(): String =
+        SimpleDateFormat("MMMM", Locale.getDefault()).format(Date())
+
+    private fun showToast(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }

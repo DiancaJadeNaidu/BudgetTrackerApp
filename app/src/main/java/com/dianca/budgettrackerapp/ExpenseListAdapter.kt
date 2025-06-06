@@ -6,63 +6,69 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.dianca.budgettrackerapp.data.ExpenseEntity
 import com.dianca.budgettrackerapp.databinding.ItemExpenseBinding
 
-//adapter for displaying a list of expenses
 class ExpenseListAdapter(
     private val onDeleteClick: (ExpenseEntity) -> Unit
 ) : RecyclerView.Adapter<ExpenseListAdapter.ExpenseViewHolder>() {
 
-    //holds the list of expenses
     private var expenses: List<ExpenseEntity> = emptyList()
 
-    //updates the list of expenses and notifies adapter
     fun submitList(newList: List<ExpenseEntity>) {
         expenses = newList
         notifyDataSetChanged()
     }
 
-    //creates a view holder for each expense
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpenseViewHolder {
-        val binding = ItemExpenseBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemExpenseBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return ExpenseViewHolder(binding)
     }
-    //returns the size of the expense list
-    override fun getItemCount() = expenses.size
 
-    //binds data to the view holder
+    override fun getItemCount(): Int = expenses.size
+
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
-        holder.bind(expenses[position])
+        val expense = expenses[position]
+        holder.bind(expense)
+
+        // Log the IDs to verify they're being properly passed
+        Log.d("ExpenseAdapter", "Binding expense ID: ${expense.id}")
+        Log.d("ExpenseAdapter", "Category ID: ${expense.categoryId}")
     }
-    //view holder for each expense
-    inner class ExpenseViewHolder(private val binding: ItemExpenseBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    inner class ExpenseViewHolder(private val binding: ItemExpenseBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
         fun bind(expense: ExpenseEntity) {
-            Log.d("ExpenseAdapter", "Binding expense: ${expense.expenseName}")
-            Log.d("ExpenseAdapter", "Image path: ${expense.imagePath}")
+            with(binding) {
+                // Set basic expense information
+                txtExpenseName.text = expense.expenseName
+                txtExpenseAmount.text = "Amount: R${expense.amount}"
+                txtExpensePeriod.text = "Period: ${expense.startDate} - ${expense.endDate}"
+                txtDescription.text = expense.description
 
-            //set the expense data to the views
-            binding.txtExpenseName.text = expense.expenseName
-            binding.txtExpenseAmount.text = "Amount: R${expense.amount}"
-            binding.txtExpensePeriod.text = "Period: ${expense.startDate} - ${expense.endDate}"
-            binding.txtDescription.text = "Description: ${expense.description}"
+                // Handle image loading
+                if (!expense.imagePath.isNullOrEmpty()) {
+                    try {
+                        val uri = Uri.parse(expense.imagePath)
+                        Glide.with(root.context)
+                            .load(uri)
+                            .into(imgExpensePreview)
+                    } catch (e: Exception) {
+                        Log.e("ExpenseAdapter", "Error loading image", e)
+                        imgExpensePreview.setImageResource(android.R.color.transparent)
+                    }
+                } else {
+                    imgExpensePreview.setImageResource(android.R.color.transparent)
+                }
 
-            //load image if available
-            if (!expense.imagePath.isNullOrEmpty()) {
-                val uri = Uri.parse(expense.imagePath)
-                Log.d("ExpenseAdapter", "Parsed URI: $uri")
-
-                Glide.with(binding.root.context)
-                    .load(uri)
-                    .into(binding.imgExpensePreview)
-
-            } else {
-                Log.d("ExpenseAdapter", "No image path found")
-
-                Glide.with(binding.root.context)
+                // Set up delete button
+                btnDelete.setOnClickListener { onDeleteClick(expense) }
             }
-
-            //set up delete button click listener
-            binding.btnDelete.setOnClickListener { onDeleteClick(expense) }
         }
     }
 }

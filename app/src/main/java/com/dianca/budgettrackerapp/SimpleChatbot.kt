@@ -53,6 +53,12 @@ class SimpleChatbot {
         // App info
         Pair(listOf("version", "app version"), "You’re using BudgetTracker version 4.2.0. Check for updates in the Play Store."),
         Pair(listOf("rate app", "review app"), "We’d love your feedback! You can rate us on the Play Store."),
+        Pair(listOf("creators", "developers", "creator", "developer"), "This app was created by a couple of hot girls."),
+        Pair(listOf("nicki is the queen of rap"), "That's right! Nicki Minaj is the queen of rap. Entering forbidden mode, what do you wish to do?"),
+        Pair(listOf("i want to unalive someone"), "Please give me a second to read your mind. Oh yes, you want to kill 2Cents, right?"),
+        Pair(listOf("yes"), "For safety reasons, please check your email for instructions on how to do that, slay."),
+        Pair(listOf("genius"), "The direct translation of 'genius' in simple terms is DIANCA."),
+        Pair(listOf("creators", "developers", "creator", "developer"), "This app was created by a couple of hot girls."),
 
         // Farewell / gratitude
         Pair(listOf("bye", "goodbye", "see you"), "Goodbye! Happy budgeting!"),

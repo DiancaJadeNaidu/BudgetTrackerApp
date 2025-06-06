@@ -1,32 +1,22 @@
 package com.dianca.budgettrackerapp
 
-import androidx.room.*
+import com.dianca.budgettrackerapp.data.ExpenseEntity
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
 
-//DAO for handling expense related DB operations
-@Dao
-interface ExpenseDAO {
+class ExpenseDAO {
+    private val db = FirebaseFirestore.getInstance()
+    private val expenses = db.collection("expenses")
 
-    //insert or replace expense
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(expense: ExpenseEntity)
+    suspend fun getAll(): List<ExpenseEntity> {
+        return expenses.get().await().toObjects(ExpenseEntity::class.java)
+    }
 
-    //get all expenses
-    @Query("SELECT * FROM expenses ORDER BY timestamp DESC")
-    suspend fun getAll(): List<ExpenseEntity>
+    suspend fun insert(expense: ExpenseEntity) {
+        expenses.document(expense.id).set(expense).await()
+    }
 
-    //get expenses by category ID
-    @Query("SELECT * FROM expenses WHERE categoryId = :categoryId")
-    suspend fun getExpensesByCategoryId(categoryId: Int): List<ExpenseEntity>
-
-    //another method to get by category
-    @Query("SELECT * FROM expenses WHERE categoryId = :categoryId")
-    suspend fun getByCategory(categoryId: Int): List<ExpenseEntity>
-
-    //get total amount spent for a category
-    @Query("SELECT SUM(amount) FROM expenses WHERE categoryId = :categoryId")
-    suspend fun getTotalByCategory(categoryId: Int): Double
-
-    //delete an expense
-    @Delete
-    suspend fun delete(expense: ExpenseEntity)
+    suspend fun delete(expense: ExpenseEntity) {
+        expenses.document(expense.id).delete().await()
+    }
 }
