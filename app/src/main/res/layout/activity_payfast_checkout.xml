@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Scrollable content -->
+    <!--scrollable content -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,7 +19,7 @@
             android:gravity="center"
             android:paddingBottom="32dp">
 
-            <!-- Header -->
+            <!--header -->
             <TextView
                 android:text="Secure Checkout"
                 android:textSize="26sp"
@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <!-- Card container -->
+            <!--card container -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentTop="true">
 
-                <!-- Name -->
+                <!--name -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                         android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Card Number -->
+                <!--card Number -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                         android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Bank Name -->
+                <!--bank name -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                         android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Pay Button -->
+                <!--pay btn -->
                 <Button
                     android:id="@+id/payButton"
                     android:text="Click to Claim R500 Reward"
@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp" />
 
-                <!-- Cancel Button -->
+                <!--cancel button -->
                 <Button
                     android:id="@+id/cancelButton"
                     android:text="Cancel"
@@ -133,7 +133,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Nav -->
+    <!--bottom nav -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"

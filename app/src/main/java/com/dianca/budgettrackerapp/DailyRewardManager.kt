@@ -12,7 +12,7 @@ object DailyRewardManager {
         val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val lastClaimTime = prefs.getLong(KEY_LAST_CLAIM, 0)
         val now = System.currentTimeMillis()
-        return now - lastClaimTime > 24 * 60 * 60 * 1000 // 24 hours
+        return now - lastClaimTime > 24 * 60 * 60 * 1000 //24 hours
     }
 
     fun claimReward(context: Context): Boolean {

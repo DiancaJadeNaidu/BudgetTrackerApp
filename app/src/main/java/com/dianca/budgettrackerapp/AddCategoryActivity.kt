@@ -15,6 +15,15 @@ class AddCategoryActivity : BaseActivity() {
     private lateinit var btnGoToManage: Button
     private val categoryDAO = CategoryDAO()
 
+    /**
+     * Attribution:
+     * Website: Building a Personal Finance App with Kotlin – Surfside Media.
+     *
+     *  Author: Surfside Media Editorial Team
+     *  URL: https://www.surfsidemedia.in/post/building-a-personal-finance-app-with-kotlin
+     *  Accessed on: 2025-06-07
+     */
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_category)

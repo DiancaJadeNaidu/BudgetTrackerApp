@@ -55,16 +55,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    //adding roomdb
-//    implementation("androidx.room:room-runtime:2.6.1")
-//    kapt("androidx.room:room-compiler:2.6.1")
-//    implementation("androidx.room:room-ktx:2.6.1")
 
-    // Firebase database
-    // Use platform() with the BOM version
+    //firebase database
+    //use platform() with the BOM version
     implementation(platform("com.google.firebase:firebase-bom:32.7.3"))
 
-// Add features without versions
+//add features without versions
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-storage-ktx")

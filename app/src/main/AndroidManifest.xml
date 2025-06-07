@@ -58,27 +58,27 @@
         <activity android:name=".ManageCategoryActivity" android:exported="true" />
         <!--summary screen-->
         <activity android:name=".SummaryActivity" android:exported="true" />
-
+        <!--chat screen-->
         <activity android:name=".ChatActivity" android:exported="true" />
-
+        <!--mini games screen-->
         <activity android:name=".MiniGamesActivity" android:exported="true" />
-
+        <!--quiz game screen-->
         <activity android:name=".QuizGameActivity" android:exported="true" />
-
+        <!--memory game screen-->
         <activity android:name=".MemoryGameActivity" android:exported="true" />
-
+        <!--tap game screen-->
         <activity android:name=".TapGameActivity" android:exported="true" />
-
+        <!--spin game screen-->
         <activity android:name=".SpinGameActivity" android:exported="true" />
-
+        <!--reward screen-->
         <activity android:name=".RewardActivity" android:exported="true" />
-
+        <!--payfast checkout screen-->
         <activity android:name=".PayfastCheckoutActivity" android:exported="true" />
-
+        <!--payfast payment screen-->
         <activity android:name=".DashboardActivity" android:exported="true" />
-
+        <!--pie chart screen-->
         <activity android:name=".PieChartActivity" android:exported="true" />
-
+        <!--budget progress screen-->
         <activity android:name=".BudgetProgressActivity" android:exported="true" />
 
 

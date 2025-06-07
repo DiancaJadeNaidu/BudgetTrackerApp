@@ -19,9 +19,19 @@ import kotlinx.coroutines.tasks.await
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Attribution:
+ * Website: Android – Create a Pie Chart with Kotlin – GeeksforGeeks.
+ *
+ *  Author: GeeksforGeeks Team
+ *  URL: https://www.geeksforgeeks.org/android-create-a-pie-chart-with-kotlin/
+ *  Accessed on: 2025-06-07
+ */
+
+
 class PieChartActivity : BaseActivity() {
 
-    // ─── Views ────────────────────────────────────────────
+    //views
     private lateinit var pieChart    : PieChart
     private lateinit var spinnerMonth: Spinner
     private lateinit var spinnerMode : Spinner
@@ -29,7 +39,7 @@ class PieChartActivity : BaseActivity() {
     private lateinit var txtStatus   : TextView
     private lateinit var btnBack     : Button
 
-    // ─── Helpers ──────────────────────────────────────────
+    //helpers
     private val firestore = FirebaseFirestore.getInstance()
     private val goalDAO   = BudgetGoalDAO()
 
@@ -45,7 +55,7 @@ class PieChartActivity : BaseActivity() {
         Color.parseColor("#8D6E63"), Color.parseColor("#26C6DA")
     )
 
-    // ─── Lifecycle ────────────────────────────────────────
+    //lifecycle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pie)
@@ -67,7 +77,7 @@ class PieChartActivity : BaseActivity() {
         btnBack      = findViewById(R.id.btnBackToDashboard)
     }
 
-    // ─── Spinner set-up ───────────────────────────────────
+    //setup for spinner
     private fun configureSpinners() {
         val months = generatePast12Months()
         spinnerMonth.adapter = ArrayAdapter(
@@ -109,7 +119,7 @@ class PieChartActivity : BaseActivity() {
         }
     }
 
-    // ─── Chart look & feel (once) ─────────────────────────
+    //chart
     private fun stylePieChart() = pieChart.apply {
         description.isEnabled = false
         isDrawHoleEnabled = true
@@ -129,10 +139,10 @@ class PieChartActivity : BaseActivity() {
         }
     }
 
-    // ─── Main loader ──────────────────────────────────────
+    //main loader
     private fun loadChartData() = lifecycleScope.launch(Dispatchers.IO) {
         try {
-            /* 1️⃣  Categories (id➜name) */
+            //categories (id to name)
             val catMap = firestore.collection("categories")
                 .get().await()
                 .documents.associateBy(
@@ -140,7 +150,7 @@ class PieChartActivity : BaseActivity() {
                     { it.toObject(CategoryEntity::class.java)?.name ?: "Unknown" }
                 )
 
-            /* 2️⃣  Expenses filtered to month */
+            //expenses filtered to month
             val allExpenses = firestore.collection("expenses")
                 .get().await()
                 .toObjects(ExpenseEntity::class.java)
@@ -148,7 +158,7 @@ class PieChartActivity : BaseActivity() {
             val (startMs, endMs) = monthBounds(selectedLabel)
             val expensesThisMonth = allExpenses.filter { it.timestamp in startMs..endMs }
 
-            /* 3️⃣  Aggregate totals + grand total */
+            //aggregate totals + grand total
             var grandTotal = 0.0
             val totals = mutableMapOf<String, Double>()
             for (e in expensesThisMonth) {
@@ -158,11 +168,11 @@ class PieChartActivity : BaseActivity() {
                 grandTotal += e.amount
             }
 
-            /* 4️⃣  Latest goal (month name only) */
+            //latest goal (month name only)
             val monthNameOnly = monthFmtName.format(monthFmtFull.parse(selectedLabel)!!)
             val goal = goalDAO.getGoalsForMonth(monthNameOnly).lastOrNull()
 
-            /* 5️⃣  Build chart data */
+            //build chart data
             val entries = totals.map { PieEntry(it.value.toFloat(), it.key) }
             val dataSet = PieDataSet(entries, "Spending by Category").apply {
                 colors = COLORS
@@ -184,7 +194,7 @@ class PieChartActivity : BaseActivity() {
                 pieChart.centerText = "${selectedLabel}\n(Rands)"
             }
 
-            /* 6️⃣  Switch to UI thread */
+          //ui thread
             runOnUiThread {
                 if (entries.isEmpty()) {
                     pieChart.clear()
@@ -195,12 +205,12 @@ class PieChartActivity : BaseActivity() {
                     pieChart.invalidate()
                 }
 
-                // Goal read-out
+                //goal read-out
                 txtGoals.text = goal?.let {
                     "Goal for $monthNameOnly →  Min R${it.minGoalAmount}  •  Max R${it.maxGoalAmount}"
                 } ?: "No budget goals saved for $monthNameOnly"
 
-                // Red / green banner
+                //red(bad) and green(good) messages
                 if (goal != null) {
                     txtStatus.visibility = View.VISIBLE
                     if (grandTotal > goal.maxGoalAmount) {

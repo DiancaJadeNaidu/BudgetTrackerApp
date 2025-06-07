@@ -34,7 +34,7 @@ class QuizGameActivity : BaseActivity() {
         //set up bottom navigation
         setupBottomNav()
 
-        // ✅ Initialize views using findViewById
+        //initialise views using findViewById
         tvQuestion = findViewById(R.id.tvQuestion)
         btnOption1 = findViewById(R.id.btnOption1)
         btnOption2 = findViewById(R.id.btnOption2)

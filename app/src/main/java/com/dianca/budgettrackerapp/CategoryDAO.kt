@@ -25,9 +25,8 @@ class CategoryDAO @Inject constructor() {
         }
     }
 
-    /**
-     * Update an existing category
-     */
+
+     //update an existing category
     suspend fun updateCategory(category: CategoryEntity) {
         try {
             require(category.id.isNotEmpty()) { "Category ID cannot be empty" }
@@ -44,9 +43,7 @@ class CategoryDAO @Inject constructor() {
         }
     }
 
-    /**
-     * Delete a category by its ID
-     */
+    //delete category by ID
     suspend fun deleteCategory(categoryId: String) {
         try {
             require(categoryId.isNotEmpty()) { "Category ID cannot be empty" }
@@ -59,9 +56,7 @@ class CategoryDAO @Inject constructor() {
         }
     }
 
-    /**
-     * Get a single category by ID
-     */
+    //get category by ID
     suspend fun getCategoryById(categoryId: String): CategoryEntity? {
         return try {
             require(categoryId.isNotEmpty()) { "Category ID cannot be empty" }
@@ -83,9 +78,7 @@ class CategoryDAO @Inject constructor() {
         }
     }
 
-    /**
-     * Get all categories with real-time updates
-     */
+    //get all category real time
     fun getAllCategoriesLive(
         onSuccess: (List<CategoryEntity>) -> Unit,
         onError: (Exception) -> Unit
@@ -108,9 +101,7 @@ class CategoryDAO @Inject constructor() {
         }
     }
 
-    /**
-     * Get all categories once (without real-time updates)
-     */
+    //get all category by ID w/o real time
     suspend fun getAllCategories(): List<CategoryEntity> {
         return try {
             val snapshot = categoryCollection.get().await()
@@ -125,9 +116,7 @@ class CategoryDAO @Inject constructor() {
         }
     }
 
-    /**
-     * Delete all categories (use with caution)
-     */
+    //delete ALL category
     suspend fun deleteAllCategories() {
         try {
             val snapshot = categoryCollection.get().await()

@@ -21,6 +21,15 @@ import android.util.Base64
 import java.io.ByteArrayOutputStream
 
 
+/**
+ * Attribution:
+ * Website: Build an Expense Tracker App with Jetpack Compose & MVVM – YouTube.
+ *
+ *  Author: Philipp Lackner
+ *  URL: https://www.youtube.com/watch?v=LfHkAUzup5E
+ *  Accessed on: 2025-06-07
+ */
+
 class AddExpenseActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAddexpenseBinding

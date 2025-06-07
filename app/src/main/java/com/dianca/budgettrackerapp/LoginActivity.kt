@@ -6,6 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.dianca.budgettrackerapp.databinding.ActivityLoginBinding
 
+/**
+ * Attribution:
+ * Website: Get Started with Firebase Authentication on Android – Firebase Docs.
+ *
+ *  Author: Firebase Documentation Team (Google)
+ *  URL: https://firebase.google.com/docs/auth/android/start
+ *  Accessed on: 2025-06-07
+ */
+
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding

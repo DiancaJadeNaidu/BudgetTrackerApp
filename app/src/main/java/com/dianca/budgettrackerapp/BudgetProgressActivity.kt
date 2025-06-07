@@ -17,30 +17,39 @@ import kotlinx.coroutines.tasks.await
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Attribution:
+ * Website: Android ProgressBar using Kotlin – DigitalOcean Community.
+ *
+ *  Author: Anupam Chugh
+ *  URL: https://www.digitalocean.com/community/tutorials/android-progressbar-using-kotlin
+ *  Accessed on: 2025-06-07
+ */
+
+
 class BudgetProgressActivity : BaseActivity() {
 
-    // ─── Views ─────────────────────────────────────
     private lateinit var spinnerMonth  : Spinner
     private lateinit var txtGoalStatus : TextView
     private lateinit var layoutBars    : LinearLayout
     private lateinit var btnBack       : Button
 
-    // ─── Helpers ───────────────────────────────────
+    //helpers
     private val firestore = FirebaseFirestore.getInstance()
     private val goalDAO   = BudgetGoalDAO()
 
-    private val monthFmtFull = SimpleDateFormat("MMMM yyyy", Locale.getDefault()) // "June 2025"
-    private val monthFmtName = SimpleDateFormat("MMMM",      Locale.getDefault()) // "June"
-    private var selectedLabel = monthFmtFull.format(Date())                       // default = now
+    private val monthFmtFull = SimpleDateFormat("MMMM yyyy", Locale.getDefault()) //"June 2025"
+    private val monthFmtName = SimpleDateFormat("MMMM",      Locale.getDefault()) //"June"
+    private var selectedLabel = monthFmtFull.format(Date())                       //default = now
 
-    // ─── Lifecycle ─────────────────────────────────
+    //lifecycle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_progress)
 
         setupBottomNav()
 
-        // bind views
+        //bind views
         spinnerMonth  = findViewById(R.id.spinnerMonth)
         txtGoalStatus = findViewById(R.id.txtGoalStatus)
         layoutBars    = findViewById(R.id.layoutProgressBars)
@@ -51,7 +60,7 @@ class BudgetProgressActivity : BaseActivity() {
         configureSpinner()
     }
 
-    // ─── Month chooser ─────────────────────────────
+    //month chooser
     private fun configureSpinner() {
         val months = generatePast12Months()
         spinnerMonth.adapter = ArrayAdapter(
@@ -69,7 +78,7 @@ class BudgetProgressActivity : BaseActivity() {
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
 
-        // first load (current month)
+        //first load (current month)
         loadProgressData()
     }
 
@@ -82,10 +91,10 @@ class BudgetProgressActivity : BaseActivity() {
         }
     }
 
-    // ─── Core loader ───────────────────────────────
+    //core loader
     private fun loadProgressData() = lifecycleScope.launch(Dispatchers.IO) {
         try {
-            /* 1️⃣  Category id ➜ name  */
+
             val catMap = firestore.collection("categories")
                 .get().await()
                 .documents.associateBy(
@@ -93,7 +102,7 @@ class BudgetProgressActivity : BaseActivity() {
                     { it.toObject(CategoryEntity::class.java)?.name ?: "Unknown" }
                 )
 
-            /* 2️⃣  Expenses filtered to selected month */
+            //expenses filtered to selected month
             val allExpenses = firestore.collection("expenses")
                 .get().await()
                 .toObjects(ExpenseEntity::class.java)
@@ -101,7 +110,7 @@ class BudgetProgressActivity : BaseActivity() {
             val (startMs, endMs) = monthBounds(selectedLabel)
             val expenses = allExpenses.filter { it.timestamp in startMs..endMs }
 
-            /* 3️⃣  Aggregate per category + grand total */
+            //aggregate per category + grand total
             var grandTotal = 0.0
             val totals = mutableMapOf<String, Double>()
             for (e in expenses) {
@@ -111,11 +120,10 @@ class BudgetProgressActivity : BaseActivity() {
                 grandTotal += e.amount
             }
 
-            /* 4️⃣  Goal for this month (if any) */
+            //Goal for this month (if any)
             val monthNameOnly = monthFmtName.format(monthFmtFull.parse(selectedLabel)!!)
             val goal = goalDAO.getGoalsForMonth(monthNameOnly).lastOrNull()
 
-            /* 5️⃣  Switch to UI thread – build UI  */
             runOnUiThread {
                 // Overall banner
                 txtGoalStatus.text = when (goal) {
@@ -134,10 +142,10 @@ class BudgetProgressActivity : BaseActivity() {
                     }
                 }
 
-                // Per-category bars
+                //per-category bars
                 layoutBars.removeAllViews()
                 for ((category, spent) in totals) {
-                    // Label
+                    //label
                     val lbl = TextView(this@BudgetProgressActivity).apply {
                         text = "$category  •  R${"%.0f".format(spent)}"
                         setTextColor(Color.WHITE)
@@ -145,7 +153,7 @@ class BudgetProgressActivity : BaseActivity() {
                     }
                     layoutBars.addView(lbl)
 
-                    // Progress bar
+                    //progress bar
                     val bar = ProgressBar(
                         this@BudgetProgressActivity,
                         null,
@@ -155,7 +163,7 @@ class BudgetProgressActivity : BaseActivity() {
                         max = if (maxVal == 0) 1 else maxVal
                         progress = spent.toInt().coerceAtMost(max)
 
-                        // Colour logic
+                        //colour logic
                         val tint = when {
                             goal == null                       -> Color.CYAN
                             spent > goal.maxGoalAmount         -> Color.RED
@@ -175,7 +183,6 @@ class BudgetProgressActivity : BaseActivity() {
                     layoutBars.addView(bar)
                 }
 
-                // Edge case: no expenses
                 if (totals.isEmpty()) {
                     val none = TextView(this@BudgetProgressActivity).apply {
                         text = "No expenses captured for $selectedLabel"
@@ -196,7 +203,6 @@ class BudgetProgressActivity : BaseActivity() {
         }
     }
 
-    /** Returns first & last millis for "June 2025" */
     private fun monthBounds(label: String): Pair<Long, Long> {
         val cal = Calendar.getInstance().apply {
             time = monthFmtFull.parse(label) ?: Date()

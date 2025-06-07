@@ -17,15 +17,24 @@ class ChatActivity : BaseActivity() {
     private lateinit var adapter: ChatAdapter
     private lateinit var chatbot: SimpleChatbot
 
+    /**
+     * Attribution:
+     * Website: From Android to Chatbots: Kotlin’s Seamless Transition to Conversational UI – CloudDevs.
+     *
+     *  Author: Victor
+     *  URL: https://clouddevs.com/kotlin/building-chatbots/
+     *  Accessed on: 2025-06-07
+     */
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Setup bottom navigation
+        //setup bottom navigation
         setupBottomNav()
 
-        // Initialize views
+        //initialize views
         recyclerView = binding.chatRecyclerView
         editText = binding.messageEditText
         sendButton = binding.sendButton
@@ -40,7 +49,7 @@ class ChatActivity : BaseActivity() {
             sendMessage()
         }
 
-        // Handle "Send" from soft keyboard
+        //handle "Send" from keyboard
         editText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEND) {
                 sendMessage()

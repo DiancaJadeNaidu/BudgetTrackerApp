@@ -11,9 +11,18 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Attribution:
+ * Website: Android x Kotlin Beginner Tutorial : Budget Tracker App [2021]
+ *
+ * Author: The Zone
+ * URL: https://www.youtube.com/playlist?list=PLpZQVidZ65jPUF-o0LUvkY-XVAAkvL-Xb
+ * Accessed on: 2025-06-07
+ */
+
 class BudgetGoalsActivity : BaseActivity() {
 
-    // ─── View refs ──────────────────────────────────────────────────────────────
+
     private lateinit var edtSalary: EditText
     private lateinit var edtMinBudget: EditText
     private lateinit var edtMaxBudget: EditText
@@ -24,12 +33,12 @@ class BudgetGoalsActivity : BaseActivity() {
     private lateinit var btnSaveBudget: Button
     private lateinit var txtDisplayGoals: TextView
 
-    // ─── Data / helpers ─────────────────────────────────────────────────────────
+    //helpers
     private val maxSeekLimit = 1_000
     private val goalDAO = BudgetGoalDAO()
     private val currentMonth by lazy { getCurrentMonthFormatted() }
 
-    // ─── Lifecycle ─────────────────────────────────────────────────────────────
+    //lifecycle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_budget_goals)
@@ -39,11 +48,10 @@ class BudgetGoalsActivity : BaseActivity() {
         initSeekBarsAndInputs()
         initListeners()
 
-        // 👉 show any saved goals as soon as we open the screen
+        //show any saved goals as soon as we open the screen
         loadGoalsForMonth(currentMonth)
     }
 
-    // ─── UI initialisation helpers ─────────────────────────────────────────────
     private fun bindViews() {
         edtSalary        = findViewById(R.id.edtSalary)
         edtMinBudget     = findViewById(R.id.edtMinBudget)
@@ -69,17 +77,17 @@ class BudgetGoalsActivity : BaseActivity() {
     }
 
     private fun initListeners() {
-        // Seek-bar <--> EditText synchronisation
+        //seekbar code
         seekBarMinBudget.setOnSeekBarChangeListener(seekBarListener(edtMinBudget, txtMinSeek, "Min Budget"))
         seekBarMaxBudget.setOnSeekBarChangeListener(seekBarListener(edtMaxBudget, txtMaxSeek, "Max Budget"))
         addSeekSyncListener(edtMinBudget, seekBarMinBudget)
         addSeekSyncListener(edtMaxBudget, seekBarMaxBudget)
 
-        // Save button
+        //save btn
         btnSaveBudget.setOnClickListener { saveGoals() }
     }
 
-    // ─── Save logic ────────────────────────────────────────────────────────────
+    //saving logic
     private fun saveGoals() {
         val salary    = edtSalary.text.toString().toDoubleOrNull()
         val minBudget = edtMinBudget.text.toString().toDoubleOrNull()
@@ -99,7 +107,7 @@ class BudgetGoalsActivity : BaseActivity() {
         }
 
         val goal = BudgetGoalEntity(
-            id = UUID.randomUUID().toString(),   // always a fresh document
+            id = UUID.randomUUID().toString(),   //always a fresh document
             categoryId = "1",
             minGoalAmount = minBudget,
             maxGoalAmount = maxBudget,
@@ -110,7 +118,7 @@ class BudgetGoalsActivity : BaseActivity() {
             try {
                 goalDAO.insert(goal)
                 showToast("Budget goals saved successfully!")
-                loadGoalsForMonth(currentMonth)   // refresh label
+                loadGoalsForMonth(currentMonth)   //refresh label
                 resetUI()
             } catch (e: Exception) {
                 showToast("Failed to save to Firestore.")
@@ -118,11 +126,11 @@ class BudgetGoalsActivity : BaseActivity() {
         }
     }
 
-    // ─── Read & display goals ──────────────────────────────────────────────────
+    //read and display goals
     private fun loadGoalsForMonth(month: String) {
         lifecycleScope.launch {
             val goals = goalDAO.getGoalsForMonth(month)
-            val latestGoal = goals.lastOrNull()          // choose the newest record
+            val latestGoal = goals.lastOrNull()          //choose the newest record
             if (latestGoal != null) {
                 txtDisplayGoals.text =
                     "Min Budget for $month: R${latestGoal.minGoalAmount}\n" +
@@ -133,7 +141,6 @@ class BudgetGoalsActivity : BaseActivity() {
         }
     }
 
-    // ─── Misc helpers ──────────────────────────────────────────────────────────
     private fun resetUI() {
         edtSalary.setText("")
         edtMinBudget.setText("")
